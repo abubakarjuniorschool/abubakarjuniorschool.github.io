@@ -686,3 +686,53 @@ footer a:hover {
         padding: 65px 0;
     }
 }
+/* ADMISSIONS */
+
+.admissions-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.admission-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 35px;
+}
+
+.admission-number {
+    color: var(--orange);
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.admission-card h3 {
+    color: var(--dark);
+    margin-bottom: 10px;
+}
+
+.admission-contact {
+    margin-top: 45px;
+    padding: 35px;
+    text-align: center;
+    background: var(--light-blue);
+    border-radius: 12px;
+}
+
+.admission-contact h3 {
+    color: var(--dark);
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.admission-contact .btn {
+    margin-top: 18px;
+}
+
+@media (max-width: 850px) {
+    .admissions-grid {
+        grid-template-columns: 1fr;
+    }
+}
