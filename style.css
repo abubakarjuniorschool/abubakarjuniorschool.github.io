@@ -72,16 +72,11 @@ body {
     color: var(--dark);
 }
 
-.logo-icon {
-    width: 52px;
-    height: 52px;
-    background: var(--blue);
-    color: white;
-    border-radius: 10px;
-    display: grid;
-    place-items: center;
-    font-weight: bold;
-    font-size: 15px;
+.school-logo {
+    width: 55px;
+    height: 55px;
+    object-fit: contain;
+    border-radius: 8px;
 }
 
 .logo strong {
