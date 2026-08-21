@@ -65,6 +65,41 @@ body {
     padding: 8px 0;
 }
 
+/* ANNOUNCEMENT TICKER */
+
+.ticker-wrap {
+    background: var(--orange);
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+}
+
+.ticker-track {
+    display: inline-flex;
+    animation: ticker-scroll 25s linear infinite;
+}
+
+.ticker-wrap:hover .ticker-track {
+    animation-play-state: paused;
+}
+
+.ticker-item {
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 10px 50px;
+    white-space: nowrap;
+}
+
+@keyframes ticker-scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
 /* HEADER */
 
 .header {
