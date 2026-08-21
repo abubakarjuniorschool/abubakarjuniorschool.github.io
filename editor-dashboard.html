@@ -1,1 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Editor Dashboard | Abubakar Junior School</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6f9;
+            color: #222;
+        }
+
+        /* HEADER */
+
+        .dashboard-header {
+            background: #0756a8;
+            color: white;
+            padding: 18px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .dashboard-header h1 {
+            font-size: 21px;
+        }
+
+        .dashboard-header span {
+            font-size: 13px;
+            opacity: 0.85;
+        }
+
+        .logout-btn {
+            background: #d90429;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* MAIN */
+
+        .dashboard-container {
+            width: min(1100px, 94%);
+            margin: 30px auto;
+        }
+
+        .welcome {
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+        }
+
+        .welcome h2 {
+            color: #0756a8;
+            margin-bottom: 8px;
+        }
+
+        .welcome p {
+            color: #666;
+        }
+
+        /* EDITOR GRID */
+
+        .editor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+        }
+
+        .editor-card {
+            background: white;
+            border-radius: 14px;
+            padding: 25px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+            cursor: pointer;
+            transition: 0.25s;
+            border: 1px solid #eee;
+        }
+
+        .editor-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .editor-icon {
+            font-size: 35px;
+            margin-bottom: 12px;
+        }
+
+        .editor-card h3 {
+            color: #0756a8;
+            margin-bottom: 7px;
+        }
+
+        .editor-card p {
+            color: #777;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* EDITOR SECTIONS */
+
+        .edit-section {
+            display: none;
+            background: white;
+            padding: 28px;
+            margin-top: 25px;
+            border-radius: 14px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+        }
+
+        .edit-section.active {
+            display: block;
+        }
+
+        .edit-section h2 {
+            color: #0756a8;
+            margin-bottom: 20px;
+        }
+
+        .field {
+            margin-bottom: 18px;
+        }
+
+        .field label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+
+        .field input,
+        .field textarea,
+        .field select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: inherit;
+        }
+
+        .field textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .save-btn {
+            background: #0756a8;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .save-btn:hover {
+            background: #06437f;
+        }
+
+        .cancel-btn {
+            background: #777;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-left: 8px;
+        }
+
+        /* PHOTO UPLOAD */
+
+        .photo-upload {
+            border: 2px dashed #bbb;
+            padding: 35px;
+            text-align: center;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .photo-upload input {
+            margin-top: 15px;
+        }
+
+        #photoPreview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .preview-item {
+            position: relative;
+        }
+
+        .preview-item img {
+            width: 100%;
+            height: 130px;
+            object-fit: cover;
+            border-radius: 9px;
+        }
+
+        .preview-item button {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            background: #d90429;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+        }
+
+        /* FOOTER */
+
+        .dashboard-footer {
+            text-align: center;
+            padding: 35px 10px;
+            color: #777;
+            font-size: 13px;
+        }
+
+        @media (max-width: 600px) {
+
+            .dashboard-header {
+                padding: 15px;
+            }
+
+            .dashboard-header h1 {
+                font-size: 17px;
+            }
+
+            .dashboard-container {
+                width: 92%;
+            }
+
+            .edit-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="dashboard-header">
+
+    <div>
+        <h1>Abubakar Junior School</h1>
+        <span>Editor Dashboard</span>
+    </div>
+
+    <button class="logout-btn" onclick="logout()">
+        Logout
+    </button>
+
+</header>
+
+
+<main class="dashboard-container">
+
+    <div class="welcome">
+
+        <h2>Welcome, Editor 👋</h2>
+
+        <p>
+            From here you can update the school website.
+            Choose a section below to begin.
+        </p>
+
+    </div>
+
+
+    <!-- EDITOR CARDS -->
+
+    <div class="editor-grid">
+
+        <div class="editor-card" onclick="openSection('homepage')">
+            <div class="editor-icon">🏠</div>
+            <h3>Homepage</h3>
+            <p>
+                Edit the main welcome message, heading and school introduction.
+            </p>
+        </div>
+
+
+        <div class="editor-card" onclick="openSection('ticker')">
+            <div class="editor-icon">📢</div>
+            <h3>Announcements</h3>
+            <p>
+                Add or change the scrolling ticker announcements.
+            </p>
+        </div>
+
+
+        <div class="editor-card" onclick="openSection('about')">
+            <div class="editor-icon">📝</div>
+            <h3>About School</h3>
+            <p>
+                Update the school's description and information.
+            </p>
+        </div>
+
+
+        <div class="editor-card" onclick="openSection('academics')">
+            <div class="editor-icon">📚</div>
+            <h3>Academics</h3>
+            <p>
+                Update academic information and programmes.
+            </p>
+        </div>
+
+
+        <div class="editor-card" onclick="openSection('classes')">
+            <div class="editor-icon">🎓</div>
+            <h3>Classes</h3>
+            <p>
+                Edit P1 to P7 class information.
+            </p>
+        </div>
+
+
+        <div class="editor-card" onclick="openSection('news')">
+            <div class="editor-icon">📰</div>
+            <h3>School News</h3>
+            <p>
+                Add or edit school news and announcements.
+            </p>
+        </div>
+
+
+        <div class="editor-card" onclick="openSection('gallery')">
+            <div class="editor-icon">🖼️</div>
+            <h3>Gallery</h3>
+            <p>
+                Select photos from your device and manage school photos.
+            </p>
+        </div>
+
+
+        <div class="editor-card" onclick="openSection('contact')">
+            <div class="editor-icon">📞</div>
+            <h3>Contact</h3>
+            <p>
+                Update phone numbers, email and school address.
+            </p>
+        </div>
+
+    </div>
+
+
+    <!-- HOMEPAGE -->
+
+    <section class="edit-section" id="homepage">
+
+        <h2>🏠 Edit Homepage</h2>
+
+        <div class="field">
+            <label>Welcome Text</label>
+            <input type="text"
+                   value="WELCOME TO ABUBAKAR JUNIOR SCHOOL">
+        </div>
+
+        <div class="field">
+            <label>Main Heading</label>
+            <input type="text"
+                   value="Building Bright Minds For A Better Future">
+        </div>
+
+        <div class="field">
+            <label>Homepage Description</label>
+            <textarea>We provide quality education in a safe, disciplined and supportive environment where every child can discover their potential.</textarea>
+        </div>
+
+        <button class="save-btn" onclick="saveChanges()">
+            SAVE CHANGES
+        </button>
+
+    </section>
+
+
+    <!-- TICKER -->
+
+    <section class="edit-section" id="ticker">
+
+        <h2>📢 Edit Announcements</h2>
+
+        <div class="field">
+            <label>Announcement 1</label>
+            <input type="text"
+                   value="Term 3 begins on 8th September 2026 — prepare your child early!">
+        </div>
+
+        <div class="field">
+            <label>Announcement 2</label>
+            <input type="text"
+                   value="Admissions for the new intake are now open — contact us today!">
+        </div>
+
+        <div class="field">
+            <label>Announcement 3</label>
+            <input type="text"
+                   value="Congratulations to our P7 candidates on their excellent results!">
+        </div>
+
+        <button class="save-btn" onclick="saveChanges()">
+            SAVE ANNOUNCEMENTS
+        </button>
+
+    </section>
+
+
+    <!-- ABOUT -->
+
+    <section class="edit-section" id="about">
+
+        <h2>📝 Edit About School</h2>
+
+        <div class="field">
+            <label>About Heading</label>
+            <input type="text"
+                   value="Where Every Child Is Given A Chance To Shine">
+        </div>
+
+        <div class="field">
+            <label>First Paragraph</label>
+            <textarea>Abubakar Junior School is committed to providing quality education that develops the academic, social, moral and practical abilities of every learner.</textarea>
+        </div>
+
+        <div class="field">
+            <label>Second Paragraph</label>
+            <textarea>We believe that education is more than classroom learning. Our goal is to nurture disciplined, confident and responsible children prepared for the future.</textarea>
+        </div>
+
+        <button class="save-btn" onclick="saveChanges()">
+            SAVE ABOUT
+        </button>
+
+    </section>
+
+
+    <!-- ACADEMICS -->
+
+    <section class="edit-section" id="academics">
+
+        <h2>📚 Edit Academics</h2>
+
+        <div class="field">
+            <label>Academic Heading</label>
+            <input type="text"
+                   value="Education With Purpose">
+        </div>
+
+        <div class="field">
+            <label>Academic Description</label>
+            <textarea>Our learning programme focuses on academic achievement, creativity, discipline and practical skills.</textarea>
+        </div>
+
+        <button class="save-btn" onclick="saveChanges()">
+            SAVE ACADEMICS
+        </button>
+
+    </section>
+
+
+    <!-- CLASSES -->
+
+    <section class="edit-section" id="classes">
+
+        <h2>🎓 Edit Classes</h2>
+
+        <div class="field">
+            <label>P1 Description</label>
+            <input type="text"
+                   value="Building strong foundations for learning.">
+        </div>
+
+        <div class="field">
+            <label>P2 Description</label>
+            <input type="text"
+                   value="Developing confidence and essential skills.">
+        </div>
+
+        <div class="field">
+            <label>P3 Description</label>
+            <input type="text"
+                   value="Strengthening knowledge and understanding.">
+        </div>
+
+        <div class="field">
+            <label>P4 Description</label>
+            <input type="text"
+                   value="Encouraging independent learning.">
+        </div>
+
+        <div class="field">
+            <label>P5 Description</label>
+            <input type="text"
+                   value="Preparing learners for greater challenges.">
+        </div>
+
+        <div class="field">
+            <label>P6 Description</label>
+            <input type="text"
+                   value="Preparing learners for upper primary.">
+        </div>
+
+        <div class="field">
+            <label>P7 Description</label>
+            <input type="text"
+                   value="Preparing learners for their next level.">
+        </div>
+
+        <button class="save-btn" onclick="saveChanges()">
+            SAVE CLASSES
+        </button>
+
+    </section>
+
+
+    <!-- NEWS -->
+
+    <section class="edit-section" id="news">
+
+        <h2>📰 Edit School News</h2>
+
+        <div class="field">
+            <label>News Title</label>
+            <input type="text"
+                   value="Welcome to Abubakar Junior School">
+        </div>
+
+        <div class="field">
+            <label>News Description</label>
+            <textarea>Follow this page for school announcements, activities and important updates.</textarea>
+        </div>
+
+        <button class="save-btn" onclick="saveChanges()">
+            SAVE NEWS
+        </button>
+
+    </section>
+
+
+    <!-- GALLERY -->
+
+    <section class="edit-section" id="gallery">
+
+        <h2>🖼️ School Gallery</h2>
+
+        <div class="photo-upload">
+
+            <h3>Select Photos From Your Device</h3>
+
+            <p style="margin-top:8px; color:#777;">
+                You can select one or several photos.
+            </p>
+
+            <input
+                type="file"
+                id="photoInput"
+                accept="image/*"
+                multiple
+            >
+
+        </div>
+
+        <div id="photoPreview"></div>
+
+        <button class="save-btn" onclick="saveChanges()">
+            SAVE PHOTOS
+        </button>
+
+    </section>
+
+
+    <!-- CONTACT -->
+
+    <section class="edit-section" id="contact">
+
+        <h2>📞 Edit Contact Information</h2>
+
+        <div class="field">
+            <label>Phone Number</label>
+            <input type="text"
+                   value="+256 707 221 378">
+        </div>
+
+        <div class="field">
+            <label>Email Address</label>
+            <input type="email"
+                   value="abubakarjuniorschool123@gmail.com">
+        </div>
+
+        <div class="field">
+            <label>Address</label>
+            <textarea>Abubakar Junior School, Uganda</textarea>
+        </div>
+
+        <div class="field">
+            <label>WhatsApp Number</label>
+            <input type="text"
+                   value="+256 707 221 378">
+        </div>
+
+        <button class="save-btn" onclick="saveChanges()">
+            SAVE CONTACT
+        </button>
+
+    </section>
+
+</main>
+
+
+<footer class="dashboard-footer">
+
+    Abubakar Junior School — Editor Dashboard
+
+</footer>
+
+
+<script>
+
+    /* ==========================
+       CHECK LOGIN
+       ========================== */
+
+    if (sessionStorage.getItem("editorLoggedIn") !== "true") {
+
+        window.location.href = "editor-login.html";
+
+    }
+
+
+    /* ==========================
+       OPEN EDITOR SECTION
+       ========================== */
+
+    function openSection(sectionId) {
+
+        const sections =
+            document.querySelectorAll(".edit-section");
+
+        sections.forEach(section => {
+            section.classList.remove("active");
+        });
+
+        const selected =
+            document.getElementById(sectionId);
+
+        if (selected) {
+
+            selected.classList.add("active");
+
+            selected.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        }
+
+    }
+
+
+    /* ==========================
+       SAVE BUTTON
+       ========================== */
+
+    function saveChanges() {
+
+        alert(
+            "Changes prepared successfully.\n\n" +
+            "The permanent saving system will be connected in the next stage."
+        );
+
+    }
+
+
+    /* ==========================
+       PHOTO PREVIEW
+       ========================== */
+
+    document
+        .getElementById("photoInput")
+        .addEventListener("change", function(event) {
+
+            const preview =
+                document.getElementById("photoPreview");
+
+            preview.innerHTML = "";
+
+            const files = event.target.files;
+
+            Array.from(files).forEach((file, index) => {
+
+                if (!file.type.startsWith("image/")) {
+                    return;
+                }
+
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+
+                    const item =
+                        document.createElement("div");
+
+                    item.className = "preview-item";
+
+                    item.innerHTML = `
+                        <img src="${e.target.result}"
+                             alt="Selected school photo">
+
+                        <button
+                            type="button"
+                            onclick="this.parentElement.remove()">
+                            ×
+                        </button>
+                    `;
+
+                    preview.appendChild(item);
+
+                };
+
+                reader.readAsDataURL(file);
+
+            });
+
+        });
+
+
+    /* ==========================
+       LOGOUT
+       ========================== */
+
+    function logout() {
+
+        sessionStorage.removeItem("editorLoggedIn");
+
+        window.location.href = "editor-login.html";
+
+    }
+
+</script>
+
+</body>
+</html>
