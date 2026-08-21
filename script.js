@@ -1,7 +1,6 @@
 // Mobile navigation
 const menuBtn = document.getElementById("menuBtn");
 const navMenu = document.getElementById("navMenu");
-
 menuBtn.addEventListener("click", () => {
     navMenu.classList.toggle("active");
 });
@@ -15,6 +14,7 @@ document.querySelectorAll("#navMenu a").forEach(link => {
 
 // Current year
 document.getElementById("year").textContent = new Date().getFullYear();
+
 // Gallery lightbox
 function openLightbox(src) {
     const lightbox = document.getElementById("lightbox");
