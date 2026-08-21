@@ -1,1 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Editor Login | Abubakar Junior School</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #0756a8, #0b3d75);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-box {
+            width: 100%;
+            max-width: 420px;
+            background: white;
+            border-radius: 18px;
+            padding: 35px 30px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+            text-align: center;
+        }
+
+        .school-logo {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            color: #0756a8;
+            font-size: 25px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 28px;
+        }
+
+        .input-group {
+            text-align: left;
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 7px;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #ddd;
+            border-radius: 9px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #0756a8;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 9px;
+            background: #d90429;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+
+        .login-btn:hover {
+            background: #b00320;
+        }
+
+        .error {
+            display: none;
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 7px;
+            background: #ffe5e5;
+            color: #c00000;
+            font-size: 14px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 22px;
+            color: #0756a8;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            .login-box {
+                padding: 30px 22px;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-box">
+
+        <img src="1771662963236.png"
+             alt="Abubakar Junior School Logo"
+             class="school-logo">
+
+        <h1>Editor Login</h1>
+
+        <p class="subtitle">
+            Abubakar Junior School
+        </p>
+
+        <form id="loginForm">
+
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input
+                    type="text"
+                    id="username"
+                    placeholder="Enter username"
+                    required
+                >
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter password"
+                    required
+                >
+            </div>
+
+            <button type="submit" class="login-btn">
+                LOGIN
+            </button>
+
+            <div class="error" id="errorMessage">
+                Incorrect username or password.
+            </div>
+
+        </form>
+
+        <a href="index.html" class="back-link">
+            ← Back to School Website
+        </a>
+
+    </div>
+
+    <script>
+
+        // TEMPORARY EDITOR LOGIN
+        // We will improve the security later.
+
+        const EDITOR_USERNAME = "editor";
+        const EDITOR_PASSWORD = "AJS2026";
+
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            const username =
+                document.getElementById("username").value.trim();
+
+            const password =
+                document.getElementById("password").value;
+
+            const errorMessage =
+                document.getElementById("errorMessage");
+
+            if (
+                username === EDITOR_USERNAME &&
+                password === EDITOR_PASSWORD
+            ) {
+
+                // Remember that the editor has logged in
+                sessionStorage.setItem("editorLoggedIn", "true");
+
+                // Go to editor dashboard
+                window.location.href = "editor-dashboard.html";
+
+            } else {
+
+                errorMessage.style.display = "block";
+
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>
