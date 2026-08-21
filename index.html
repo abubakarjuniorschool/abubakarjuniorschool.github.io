@@ -362,29 +362,36 @@
 
         <div class="gallery-grid">
 
-            <div class="gallery-item">
+            <div class="gallery-item" onclick="openLightbox('20260210_172251.jpg')">
                 <img src="20260210_172251.jpg" alt="Abubakar Junior School">
             </div>
 
-            <div class="gallery-item">
+            <div class="gallery-item" onclick="openLightbox('20260220_094404.jpg')">
                 <img src="20260220_094404.jpg" alt="Abubakar Junior School">
             </div>
 
-            <div class="gallery-item">
+            <div class="gallery-item" onclick="openLightbox('20260220_173400.jpg')">
                 <img src="20260220_173400.jpg" alt="Abubakar Junior School">
             </div>
 
-            <div class="gallery-item">
+            <div class="gallery-item" onclick="openLightbox('20260220_173451.jpg')">
                 <img src="20260220_173451.jpg" alt="Abubakar Junior School">
             </div>
 
-            <div class="gallery-item">
+            <div class="gallery-item" onclick="openLightbox('20260220_174234.jpg')">
                 <img src="20260220_174234.jpg" alt="Abubakar Junior School">
             </div>
 
         </div>
 
     </div>
+</section>
+
+<!-- LIGHTBOX MODAL -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close">&times;</span>
+    <img src="" alt="Enlarged photo" id="lightbox-img">
+</div>
 </section>
     <!-- ADMISSIONS -->
 <section class="section" id="admissions">
