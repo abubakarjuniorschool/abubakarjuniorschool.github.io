@@ -114,6 +114,13 @@
             font-size: 14px;
             line-height: 1.5;
         }
+        <div class="editor-card" onclick="openSection('logo')">
+    <div class="editor-icon">🏫</div>
+    <h3>School Logo</h3>
+    <p>
+        Change the school logo displayed across the website.
+    </p>
+</div>
 
         /* EDITOR SECTIONS */
 
@@ -184,6 +191,61 @@
             cursor: pointer;
             margin-left: 8px;
         }
+        <!-- LOGO -->
+
+<section class="edit-section" id="logo">
+
+    <h2>🏫 Change School Logo</h2>
+
+    <div style="text-align:center; margin-bottom:25px;">
+
+        <p style="margin-bottom:12px; color:#777;">
+            Current Logo
+        </p>
+
+        <img
+            id="currentLogoPreview"
+            src="1771662963236.png"
+            alt="Current School Logo"
+            style="
+                width:120px;
+                height:120px;
+                object-fit:contain;
+                border:1px solid #ddd;
+                border-radius:12px;
+                padding:8px;
+            "
+        >
+
+    </div>
+
+    <div class="photo-upload">
+
+        <h3>Choose New Logo</h3>
+
+        <p style="margin-top:8px; color:#777;">
+            Select a logo from your phone or computer.
+        </p>
+
+        <input
+            type="file"
+            id="logoInput"
+            accept="image/*"
+        >
+
+    </div>
+
+    <div id="logoPreview"
+         style="text-align:center; margin:20px 0;">
+    </div>
+
+    <button
+        class="save-btn"
+        onclick="saveLogo()">
+        SAVE LOGO
+    </button>
+
+</section>
 
         /* PHOTO UPLOAD */
 
