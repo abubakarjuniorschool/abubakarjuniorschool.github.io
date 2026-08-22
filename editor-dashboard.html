@@ -19,7 +19,9 @@
             color: #222;
         }
 
-        /* HEADER */
+        /* ==============================
+           HEADER
+           ============================== */
 
         .dashboard-header {
             background: #0756a8;
@@ -35,6 +37,7 @@
 
         .dashboard-header h1 {
             font-size: 21px;
+            margin-bottom: 4px;
         }
 
         .dashboard-header span {
@@ -52,12 +55,22 @@
             font-weight: bold;
         }
 
-        /* MAIN */
+        .logout-btn:hover {
+            background: #b00320;
+        }
+
+        /* ==============================
+           MAIN CONTAINER
+           ============================== */
 
         .dashboard-container {
             width: min(1100px, 94%);
             margin: 30px auto;
         }
+
+        /* ==============================
+           WELCOME
+           ============================== */
 
         .welcome {
             background: white;
@@ -74,9 +87,12 @@
 
         .welcome p {
             color: #666;
+            line-height: 1.6;
         }
 
-        /* EDITOR GRID */
+        /* ==============================
+           EDITOR GRID
+           ============================== */
 
         .editor-grid {
             display: grid;
@@ -114,15 +130,10 @@
             font-size: 14px;
             line-height: 1.5;
         }
-        <div class="editor-card" onclick="openSection('logo')">
-    <div class="editor-icon">🏫</div>
-    <h3>School Logo</h3>
-    <p>
-        Change the school logo displayed across the website.
-    </p>
-</div>
 
-        /* EDITOR SECTIONS */
+        /* ==============================
+           EDIT SECTIONS
+           ============================== */
 
         .edit-section {
             display: none;
@@ -163,10 +174,20 @@
             font-family: inherit;
         }
 
+        .field input:focus,
+        .field textarea:focus {
+            outline: none;
+            border-color: #0756a8;
+        }
+
         .field textarea {
             min-height: 120px;
             resize: vertical;
         }
+
+        /* ==============================
+           BUTTONS
+           ============================== */
 
         .save-btn {
             background: #0756a8;
@@ -191,63 +212,10 @@
             cursor: pointer;
             margin-left: 8px;
         }
-        <!-- LOGO -->
 
-<section class="edit-section" id="logo">
-
-    <h2>🏫 Change School Logo</h2>
-
-    <div style="text-align:center; margin-bottom:25px;">
-
-        <p style="margin-bottom:12px; color:#777;">
-            Current Logo
-        </p>
-
-        <img
-            id="currentLogoPreview"
-            src="1771662963236.png"
-            alt="Current School Logo"
-            style="
-                width:120px;
-                height:120px;
-                object-fit:contain;
-                border:1px solid #ddd;
-                border-radius:12px;
-                padding:8px;
-            "
-        >
-
-    </div>
-
-    <div class="photo-upload">
-
-        <h3>Choose New Logo</h3>
-
-        <p style="margin-top:8px; color:#777;">
-            Select a logo from your phone or computer.
-        </p>
-
-        <input
-            type="file"
-            id="logoInput"
-            accept="image/*"
-        >
-
-    </div>
-
-    <div id="logoPreview"
-         style="text-align:center; margin:20px 0;">
-    </div>
-
-    <button
-        class="save-btn"
-        onclick="saveLogo()">
-        SAVE LOGO
-    </button>
-
-</section>
-
-        /* PHOTO UPLOAD */
+        /* ==============================
+           PHOTO UPLOAD
+           ============================== */
 
         .photo-upload {
             border: 2px dashed #bbb;
@@ -259,6 +227,7 @@
 
         .photo-upload input {
             margin-top: 15px;
+            max-width: 100%;
         }
 
         #photoPreview {
@@ -290,9 +259,46 @@
             width: 28px;
             height: 28px;
             cursor: pointer;
+            font-size: 18px;
         }
 
-        /* FOOTER */
+        /* ==============================
+           LOGO PREVIEW
+           ============================== */
+
+        .logo-current {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .logo-current img {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 8px;
+            background: white;
+        }
+
+        #logoPreview {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        #logoPreview img {
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 8px;
+            background: white;
+        }
+
+        /* ==============================
+           FOOTER
+           ============================== */
 
         .dashboard-footer {
             text-align: center;
@@ -300,6 +306,10 @@
             color: #777;
             font-size: 13px;
         }
+
+        /* ==============================
+           MOBILE
+           ============================== */
 
         @media (max-width: 600px) {
 
@@ -311,6 +321,15 @@
                 font-size: 17px;
             }
 
+            .dashboard-header span {
+                font-size: 12px;
+            }
+
+            .logout-btn {
+                padding: 9px 12px;
+                font-size: 12px;
+            }
+
             .dashboard-container {
                 width: 92%;
             }
@@ -318,510 +337,1106 @@
             .edit-section {
                 padding: 20px;
             }
+
+            .photo-upload {
+                padding: 25px 15px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-<header class="dashboard-header">
+    <!-- ==============================
+         HEADER
+         ============================== -->
 
-    <div>
-        <h1>Abubakar Junior School</h1>
-        <span>Editor Dashboard</span>
-    </div>
+    <header class="dashboard-header">
 
-    <button class="logout-btn" onclick="logout()">
-        Logout
-    </button>
-
-</header>
-
-
-<main class="dashboard-container">
-
-    <div class="welcome">
-
-        <h2>Welcome, Editor 👋</h2>
-
-        <p>
-            From here you can update the school website.
-            Choose a section below to begin.
-        </p>
-
-    </div>
-
-
-    <!-- EDITOR CARDS -->
-
-    <div class="editor-grid">
-
-        <div class="editor-card" onclick="openSection('homepage')">
-            <div class="editor-icon">🏠</div>
-            <h3>Homepage</h3>
-            <p>
-                Edit the main welcome message, heading and school introduction.
-            </p>
+        <div>
+            <h1>Abubakar Junior School</h1>
+            <span>Editor Dashboard</span>
         </div>
 
-
-        <div class="editor-card" onclick="openSection('ticker')">
-            <div class="editor-icon">📢</div>
-            <h3>Announcements</h3>
-            <p>
-                Add or change the scrolling ticker announcements.
-            </p>
-        </div>
-
-
-        <div class="editor-card" onclick="openSection('about')">
-            <div class="editor-icon">📝</div>
-            <h3>About School</h3>
-            <p>
-                Update the school's description and information.
-            </p>
-        </div>
-
-
-        <div class="editor-card" onclick="openSection('academics')">
-            <div class="editor-icon">📚</div>
-            <h3>Academics</h3>
-            <p>
-                Update academic information and programmes.
-            </p>
-        </div>
-
-
-        <div class="editor-card" onclick="openSection('classes')">
-            <div class="editor-icon">🎓</div>
-            <h3>Classes</h3>
-            <p>
-                Edit P1 to P7 class information.
-            </p>
-        </div>
-
-
-        <div class="editor-card" onclick="openSection('news')">
-            <div class="editor-icon">📰</div>
-            <h3>School News</h3>
-            <p>
-                Add or edit school news and announcements.
-            </p>
-        </div>
-
-
-        <div class="editor-card" onclick="openSection('gallery')">
-            <div class="editor-icon">🖼️</div>
-            <h3>Gallery</h3>
-            <p>
-                Select photos from your device and manage school photos.
-            </p>
-        </div>
-
-
-        <div class="editor-card" onclick="openSection('contact')">
-            <div class="editor-icon">📞</div>
-            <h3>Contact</h3>
-            <p>
-                Update phone numbers, email and school address.
-            </p>
-        </div>
-
-    </div>
-
-
-    <!-- HOMEPAGE -->
-
-    <section class="edit-section" id="homepage">
-
-        <h2>🏠 Edit Homepage</h2>
-
-        <div class="field">
-            <label>Welcome Text</label>
-            <input type="text"
-                   value="WELCOME TO ABUBAKAR JUNIOR SCHOOL">
-        </div>
-
-        <div class="field">
-            <label>Main Heading</label>
-            <input type="text"
-                   value="Building Bright Minds For A Better Future">
-        </div>
-
-        <div class="field">
-            <label>Homepage Description</label>
-            <textarea>We provide quality education in a safe, disciplined and supportive environment where every child can discover their potential.</textarea>
-        </div>
-
-        <button class="save-btn" onclick="saveChanges()">
-            SAVE CHANGES
+        <button class="logout-btn" onclick="logout()">
+            Logout
         </button>
 
-    </section>
+    </header>
 
 
-    <!-- TICKER -->
+    <!-- ==============================
+         MAIN
+         ============================== -->
 
-    <section class="edit-section" id="ticker">
+    <main class="dashboard-container">
 
-        <h2>📢 Edit Announcements</h2>
+        <!-- WELCOME -->
 
-        <div class="field">
-            <label>Announcement 1</label>
-            <input type="text"
-                   value="Term 3 begins on 8th September 2026 — prepare your child early!">
-        </div>
+        <div class="welcome">
 
-        <div class="field">
-            <label>Announcement 2</label>
-            <input type="text"
-                   value="Admissions for the new intake are now open — contact us today!">
-        </div>
+            <h2>Welcome, Editor 👋</h2>
 
-        <div class="field">
-            <label>Announcement 3</label>
-            <input type="text"
-                   value="Congratulations to our P7 candidates on their excellent results!">
-        </div>
-
-        <button class="save-btn" onclick="saveChanges()">
-            SAVE ANNOUNCEMENTS
-        </button>
-
-    </section>
-
-
-    <!-- ABOUT -->
-
-    <section class="edit-section" id="about">
-
-        <h2>📝 Edit About School</h2>
-
-        <div class="field">
-            <label>About Heading</label>
-            <input type="text"
-                   value="Where Every Child Is Given A Chance To Shine">
-        </div>
-
-        <div class="field">
-            <label>First Paragraph</label>
-            <textarea>Abubakar Junior School is committed to providing quality education that develops the academic, social, moral and practical abilities of every learner.</textarea>
-        </div>
-
-        <div class="field">
-            <label>Second Paragraph</label>
-            <textarea>We believe that education is more than classroom learning. Our goal is to nurture disciplined, confident and responsible children prepared for the future.</textarea>
-        </div>
-
-        <button class="save-btn" onclick="saveChanges()">
-            SAVE ABOUT
-        </button>
-
-    </section>
-
-
-    <!-- ACADEMICS -->
-
-    <section class="edit-section" id="academics">
-
-        <h2>📚 Edit Academics</h2>
-
-        <div class="field">
-            <label>Academic Heading</label>
-            <input type="text"
-                   value="Education With Purpose">
-        </div>
-
-        <div class="field">
-            <label>Academic Description</label>
-            <textarea>Our learning programme focuses on academic achievement, creativity, discipline and practical skills.</textarea>
-        </div>
-
-        <button class="save-btn" onclick="saveChanges()">
-            SAVE ACADEMICS
-        </button>
-
-    </section>
-
-
-    <!-- CLASSES -->
-
-    <section class="edit-section" id="classes">
-
-        <h2>🎓 Edit Classes</h2>
-
-        <div class="field">
-            <label>P1 Description</label>
-            <input type="text"
-                   value="Building strong foundations for learning.">
-        </div>
-
-        <div class="field">
-            <label>P2 Description</label>
-            <input type="text"
-                   value="Developing confidence and essential skills.">
-        </div>
-
-        <div class="field">
-            <label>P3 Description</label>
-            <input type="text"
-                   value="Strengthening knowledge and understanding.">
-        </div>
-
-        <div class="field">
-            <label>P4 Description</label>
-            <input type="text"
-                   value="Encouraging independent learning.">
-        </div>
-
-        <div class="field">
-            <label>P5 Description</label>
-            <input type="text"
-                   value="Preparing learners for greater challenges.">
-        </div>
-
-        <div class="field">
-            <label>P6 Description</label>
-            <input type="text"
-                   value="Preparing learners for upper primary.">
-        </div>
-
-        <div class="field">
-            <label>P7 Description</label>
-            <input type="text"
-                   value="Preparing learners for their next level.">
-        </div>
-
-        <button class="save-btn" onclick="saveChanges()">
-            SAVE CLASSES
-        </button>
-
-    </section>
-
-
-    <!-- NEWS -->
-
-    <section class="edit-section" id="news">
-
-        <h2>📰 Edit School News</h2>
-
-        <div class="field">
-            <label>News Title</label>
-            <input type="text"
-                   value="Welcome to Abubakar Junior School">
-        </div>
-
-        <div class="field">
-            <label>News Description</label>
-            <textarea>Follow this page for school announcements, activities and important updates.</textarea>
-        </div>
-
-        <button class="save-btn" onclick="saveChanges()">
-            SAVE NEWS
-        </button>
-
-    </section>
-
-
-    <!-- GALLERY -->
-
-    <section class="edit-section" id="gallery">
-
-        <h2>🖼️ School Gallery</h2>
-
-        <div class="photo-upload">
-
-            <h3>Select Photos From Your Device</h3>
-
-            <p style="margin-top:8px; color:#777;">
-                You can select one or several photos.
+            <p>
+                From here you can update the school website.
+                Choose a section below to begin.
             </p>
 
-            <input
-                type="file"
-                id="photoInput"
-                accept="image/*"
-                multiple
+        </div>
+
+
+        <!-- ==============================
+             EDITOR CARDS
+             ============================== -->
+
+        <div class="editor-grid">
+
+            <!-- HOMEPAGE -->
+
+            <div class="editor-card" onclick="openSection('homepage')">
+
+                <div class="editor-icon">🏠</div>
+
+                <h3>Homepage</h3>
+
+                <p>
+                    Edit the main welcome message, heading and school introduction.
+                </p>
+
+            </div>
+
+
+            <!-- ANNOUNCEMENTS -->
+
+            <div class="editor-card" onclick="openSection('ticker')">
+
+                <div class="editor-icon">📢</div>
+
+                <h3>Announcements</h3>
+
+                <p>
+                    Add or change the scrolling ticker announcements.
+                </p>
+
+            </div>
+
+
+            <!-- ABOUT -->
+
+            <div class="editor-card" onclick="openSection('about')">
+
+                <div class="editor-icon">📝</div>
+
+                <h3>About School</h3>
+
+                <p>
+                    Update the school's description and information.
+                </p>
+
+            </div>
+
+
+            <!-- ACADEMICS -->
+
+            <div class="editor-card" onclick="openSection('academics')">
+
+                <div class="editor-icon">📚</div>
+
+                <h3>Academics</h3>
+
+                <p>
+                    Update academic information and programmes.
+                </p>
+
+            </div>
+
+
+            <!-- CLASSES -->
+
+            <div class="editor-card" onclick="openSection('classes')">
+
+                <div class="editor-icon">🎓</div>
+
+                <h3>Classes</h3>
+
+                <p>
+                    Edit P1 to P7 class information.
+                </p>
+
+            </div>
+
+
+            <!-- NEWS -->
+
+            <div class="editor-card" onclick="openSection('news')">
+
+                <div class="editor-icon">📰</div>
+
+                <h3>School News</h3>
+
+                <p>
+                    Add or edit school news and announcements.
+                </p>
+
+            </div>
+
+
+            <!-- GALLERY -->
+
+            <div class="editor-card" onclick="openSection('gallery')">
+
+                <div class="editor-icon">🖼️</div>
+
+                <h3>Gallery</h3>
+
+                <p>
+                    Select photos from your device and manage school photos.
+                </p>
+
+            </div>
+
+
+            <!-- CONTACT -->
+
+            <div class="editor-card" onclick="openSection('contact')">
+
+                <div class="editor-icon">📞</div>
+
+                <h3>Contact</h3>
+
+                <p>
+                    Update phone numbers, email and school address.
+                </p>
+
+            </div>
+
+
+            <!-- SCHOOL LOGO -->
+
+            <div class="editor-card" onclick="openSection('logo')">
+
+                <div class="editor-icon">🏫</div>
+
+                <h3>School Logo</h3>
+
+                <p>
+                    Change the school logo displayed across the website.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==============================
+             HOMEPAGE
+             ============================== -->
+
+        <section class="edit-section" id="homepage">
+
+            <h2>🏠 Edit Homepage</h2>
+
+            <div class="field">
+
+                <label>Welcome Text</label>
+
+                <input
+                    type="text"
+                    value="WELCOME TO ABUBAKAR JUNIOR SCHOOL"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>Main Heading</label>
+
+                <input
+                    type="text"
+                    value="Building Bright Minds For A Better Future"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>Homepage Description</label>
+
+                <textarea>We provide quality education in a safe, disciplined and supportive environment where every child can discover their potential.</textarea>
+
+            </div>
+
+
+            <button class="save-btn" onclick="saveChanges()">
+                SAVE CHANGES
+            </button>
+
+        </section>
+
+
+        <!-- ==============================
+             TICKER
+             ============================== -->
+
+        <section class="edit-section" id="ticker">
+
+            <h2>📢 Edit Announcements</h2>
+
+            <div class="field">
+
+                <label>Announcement 1</label>
+
+                <input
+                    type="text"
+                    value="Term 3 begins on 8th September 2026 — prepare your child early!"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>Announcement 2</label>
+
+                <input
+                    type="text"
+                    value="Admissions for the new intake are now open — contact us today!"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>Announcement 3</label>
+
+                <input
+                    type="text"
+                    value="Congratulations to our P7 candidates on their excellent results!"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>Announcement 4</label>
+
+                <input
+                    type="text"
+                    value="📍 Visit our school — Uganda."
+                >
+
+            </div>
+
+
+            <button class="save-btn" onclick="saveChanges()">
+                SAVE ANNOUNCEMENTS
+            </button>
+
+        </section>
+
+
+        <!-- ==============================
+             ABOUT
+             ============================== -->
+
+        <section class="edit-section" id="about">
+
+            <h2>📝 Edit About School</h2>
+
+            <div class="field">
+
+                <label>About Heading</label>
+
+                <input
+                    type="text"
+                    value="Where Every Child Is Given A Chance To Shine"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>First Paragraph</label>
+
+                <textarea>Abubakar Junior School is committed to providing quality education that develops the academic, social, moral and practical abilities of every learner.</textarea>
+
+            </div>
+
+
+            <div class="field">
+
+                <label>Second Paragraph</label>
+
+                <textarea>We believe that education is more than classroom learning. Our goal is to nurture disciplined, confident and responsible children prepared for the future.</textarea>
+
+            </div>
+
+
+            <button class="save-btn" onclick="saveChanges()">
+                SAVE ABOUT
+            </button>
+
+        </section>
+
+
+        <!-- ==============================
+             ACADEMICS
+             ============================== -->
+
+        <section class="edit-section" id="academics">
+
+            <h2>📚 Edit Academics</h2>
+
+            <div class="field">
+
+                <label>Academic Heading</label>
+
+                <input
+                    type="text"
+                    value="Education With Purpose"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>Academic Description</label>
+
+                <textarea>Our learning programme focuses on academic achievement, creativity, discipline and practical skills.</textarea>
+
+            </div>
+
+
+            <button class="save-btn" onclick="saveChanges()">
+                SAVE ACADEMICS
+            </button>
+
+        </section>
+
+
+        <!-- ==============================
+             CLASSES
+             ============================== -->
+
+        <section class="edit-section" id="classes">
+
+            <h2>🎓 Edit Classes</h2>
+
+            <div class="field">
+                <label>P1 Description</label>
+
+                <input
+                    type="text"
+                    value="Building strong foundations for learning."
+                >
+            </div>
+
+
+            <div class="field">
+                <label>P2 Description</label>
+
+                <input
+                    type="text"
+                    value="Developing confidence and essential skills."
+                >
+            </div>
+
+
+            <div class="field">
+                <label>P3 Description</label>
+
+                <input
+                    type="text"
+                    value="Strengthening knowledge and understanding."
+                >
+            </div>
+
+
+            <div class="field">
+                <label>P4 Description</label>
+
+                <input
+                    type="text"
+                    value="Encouraging independent learning."
+                >
+            </div>
+
+
+            <div class="field">
+                <label>P5 Description</label>
+
+                <input
+                    type="text"
+                    value="Preparing learners for greater challenges."
+                >
+            </div>
+
+
+            <div class="field">
+                <label>P6 Description</label>
+
+                <input
+                    type="text"
+                    value="Preparing learners for upper primary."
+                >
+            </div>
+
+
+            <div class="field">
+                <label>P7 Description</label>
+
+                <input
+                    type="text"
+                    value="Preparing learners for their next level."
+                >
+            </div>
+
+
+            <button class="save-btn" onclick="saveChanges()">
+                SAVE CLASSES
+            </button>
+
+        </section>
+
+
+        <!-- ==============================
+             NEWS
+             ============================== -->
+
+        <section class="edit-section" id="news">
+
+            <h2>📰 Edit School News</h2>
+
+            <div class="field">
+
+                <label>News Title</label>
+
+                <input
+                    type="text"
+                    value="Welcome to Abubakar Junior School"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>News Description</label>
+
+                <textarea>Follow this page for school announcements, activities and important updates.</textarea>
+
+            </div>
+
+
+            <button class="save-btn" onclick="saveChanges()">
+                SAVE NEWS
+            </button>
+
+        </section>
+
+
+        <!-- ==============================
+             GALLERY
+             ============================== -->
+
+        <section class="edit-section" id="gallery">
+
+            <h2>🖼️ School Gallery</h2>
+
+            <div class="photo-upload">
+
+                <h3>Select Photos From Your Device</h3>
+
+                <p style="margin-top:8px; color:#777;">
+                    You can select one or several photos.
+                </p>
+
+                <input
+                    type="file"
+                    id="photoInput"
+                    accept="image/*"
+                    multiple
+                >
+
+            </div>
+
+
+            <div id="photoPreview"></div>
+
+
+            <button class="save-btn" onclick="saveChanges()">
+                SAVE PHOTOS
+            </button>
+
+        </section>
+
+
+        <!-- ==============================
+             CONTACT
+             ============================== -->
+
+        <section class="edit-section" id="contact">
+
+            <h2>📞 Edit Contact Information</h2>
+
+            <div class="field">
+
+                <label>Phone Number</label>
+
+                <input
+                    type="text"
+                    value="+256 707 221 378"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>Email Address</label>
+
+                <input
+                    type="email"
+                    value="abubakarjuniorschool123@gmail.com"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>Address</label>
+
+                <textarea>Abubakar Junior School, Uganda</textarea>
+
+            </div>
+
+
+            <div class="field">
+
+                <label>WhatsApp Number</label>
+
+                <input
+                    type="text"
+                    value="+256 707 221 378"
+                >
+
+            </div>
+
+
+            <button class="save-btn" onclick="saveChanges()">
+                SAVE CONTACT
+            </button>
+
+        </section>
+
+
+        <!-- ==============================
+             SCHOOL LOGO
+             ============================== -->
+
+        <section class="edit-section" id="logo">
+
+            <h2>🏫 Change School Logo</h2>
+
+
+            <div class="logo-current">
+
+                <p style="margin-bottom:12px; color:#777;">
+                    Current Logo
+                </p>
+
+                <img
+                    id="currentLogoPreview"
+                    src="1771662963236.png"
+                    alt="Current School Logo"
+                >
+
+            </div>
+
+
+            <div class="photo-upload">
+
+                <h3>Choose New Logo</h3>
+
+                <p style="margin-top:8px; color:#777;">
+                    Select a logo from your phone or computer.
+                </p>
+
+                <input
+                    type="file"
+                    id="logoInput"
+                    accept="image/*"
+                >
+
+            </div>
+
+
+            <div id="logoPreview"></div>
+
+
+            <button
+                class="save-btn"
+                onclick="saveLogo()"
             >
+                SAVE LOGO
+            </button>
 
-        </div>
+        </section>
 
-        <div id="photoPreview"></div>
-
-        <button class="save-btn" onclick="saveChanges()">
-            SAVE PHOTOS
-        </button>
-
-    </section>
+    </main>
 
 
-    <!-- CONTACT -->
+    <!-- ==============================
+         FOOTER
+         ============================== -->
 
-    <section class="edit-section" id="contact">
+    <footer class="dashboard-footer">
 
-        <h2>📞 Edit Contact Information</h2>
+        Abubakar Junior School — Editor Dashboard
 
-        <div class="field">
-            <label>Phone Number</label>
-            <input type="text"
-                   value="+256 707 221 378">
-        </div>
-
-        <div class="field">
-            <label>Email Address</label>
-            <input type="email"
-                   value="abubakarjuniorschool123@gmail.com">
-        </div>
-
-        <div class="field">
-            <label>Address</label>
-            <textarea>Abubakar Junior School, Uganda</textarea>
-        </div>
-
-        <div class="field">
-            <label>WhatsApp Number</label>
-            <input type="text"
-                   value="+256 707 221 378">
-        </div>
-
-        <button class="save-btn" onclick="saveChanges()">
-            SAVE CONTACT
-        </button>
-
-    </section>
-
-</main>
+    </footer>
 
 
-<footer class="dashboard-footer">
+    <!-- ==============================
+         JAVASCRIPT
+         ============================== -->
 
-    Abubakar Junior School — Editor Dashboard
+    <script>
 
-</footer>
+        /* ==========================
+           CHECK LOGIN
+           ========================== */
 
+        if (
+            sessionStorage.getItem("editorLoggedIn") !== "true"
+        ) {
 
-<script>
-
-    /* ==========================
-       CHECK LOGIN
-       ========================== */
-
-    if (sessionStorage.getItem("editorLoggedIn") !== "true") {
-
-        window.location.href = "editor-login.html";
-
-    }
-
-
-    /* ==========================
-       OPEN EDITOR SECTION
-       ========================== */
-
-    function openSection(sectionId) {
-
-        const sections =
-            document.querySelectorAll(".edit-section");
-
-        sections.forEach(section => {
-            section.classList.remove("active");
-        });
-
-        const selected =
-            document.getElementById(sectionId);
-
-        if (selected) {
-
-            selected.classList.add("active");
-
-            selected.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
+            window.location.href = "editor-login.html";
 
         }
 
-    }
 
+        /* ==========================
+           OPEN EDITOR SECTION
+           ========================== */
 
-    /* ==========================
-       SAVE BUTTON
-       ========================== */
+        function openSection(sectionId) {
 
-    function saveChanges() {
+            const sections =
+                document.querySelectorAll(".edit-section");
 
-        alert(
-            "Changes prepared successfully.\n\n" +
-            "The permanent saving system will be connected in the next stage."
-        );
+            sections.forEach(function(section) {
 
-    }
-
-
-    /* ==========================
-       PHOTO PREVIEW
-       ========================== */
-
-    document
-        .getElementById("photoInput")
-        .addEventListener("change", function(event) {
-
-            const preview =
-                document.getElementById("photoPreview");
-
-            preview.innerHTML = "";
-
-            const files = event.target.files;
-
-            Array.from(files).forEach((file, index) => {
-
-                if (!file.type.startsWith("image/")) {
-                    return;
-                }
-
-                const reader = new FileReader();
-
-                reader.onload = function(e) {
-
-                    const item =
-                        document.createElement("div");
-
-                    item.className = "preview-item";
-
-                    item.innerHTML = `
-                        <img src="${e.target.result}"
-                             alt="Selected school photo">
-
-                        <button
-                            type="button"
-                            onclick="this.parentElement.remove()">
-                            ×
-                        </button>
-                    `;
-
-                    preview.appendChild(item);
-
-                };
-
-                reader.readAsDataURL(file);
+                section.classList.remove("active");
 
             });
 
-        });
+
+            const selected =
+                document.getElementById(sectionId);
+
+            if (selected) {
+
+                selected.classList.add("active");
+
+                selected.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+            }
+
+        }
 
 
-    /* ==========================
-       LOGOUT
-       ========================== */
+        /* ==========================
+           SAVE WEBSITE CHANGES
+           ========================== */
 
-    function logout() {
+        function saveChanges() {
 
-        sessionStorage.removeItem("editorLoggedIn");
+            const currentData =
+                JSON.parse(
+                    localStorage.getItem("schoolData")
+                ) || {};
 
-        window.location.href = "editor-login.html";
 
-    }
+            /* HOMEPAGE */
 
-</script>
+            const homepageSection =
+                document.getElementById("homepage");
+
+            if (
+                homepageSection.classList.contains("active")
+            ) {
+
+                const inputs =
+                    homepageSection.querySelectorAll(
+                        "input, textarea"
+                    );
+
+                currentData.heroWelcome =
+                    inputs[0].value;
+
+                currentData.heroHeading =
+                    inputs[1].value;
+
+                currentData.heroDescription =
+                    inputs[2].value;
+
+            }
+
+
+            /* TICKER */
+
+            const tickerSection =
+                document.getElementById("ticker");
+
+            if (
+                tickerSection.classList.contains("active")
+            ) {
+
+                const inputs =
+                    tickerSection.querySelectorAll("input");
+
+                currentData.ticker1 =
+                    inputs[0].value;
+
+                currentData.ticker2 =
+                    inputs[1].value;
+
+                currentData.ticker3 =
+                    inputs[2].value;
+
+                currentData.ticker4 =
+                    inputs[3].value;
+
+            }
+
+
+            /* ABOUT */
+
+            const aboutSection =
+                document.getElementById("about");
+
+            if (
+                aboutSection.classList.contains("active")
+            ) {
+
+                const inputs =
+                    aboutSection.querySelectorAll(
+                        "input, textarea"
+                    );
+
+                currentData.aboutHeading =
+                    inputs[0].value;
+
+                currentData.aboutParagraph1 =
+                    inputs[1].value;
+
+                currentData.aboutParagraph2 =
+                    inputs[2].value;
+
+            }
+
+
+            /* CONTACT */
+
+            const contactSection =
+                document.getElementById("contact");
+
+            if (
+                contactSection.classList.contains("active")
+            ) {
+
+                const inputs =
+                    contactSection.querySelectorAll(
+                        "input, textarea"
+                    );
+
+                currentData.phone =
+                    inputs[0].value;
+
+                currentData.email =
+                    inputs[1].value;
+
+                currentData.address =
+                    inputs[2].value;
+
+                currentData.whatsapp =
+                    inputs[3].value.replace(/\D/g, "");
+
+            }
+
+
+            /* SAVE */
+
+            localStorage.setItem(
+                "schoolData",
+                JSON.stringify(currentData)
+            );
+
+
+            alert(
+                "✅ Changes saved successfully!"
+            );
+
+        }
+
+
+        /* ==========================
+           PHOTO PREVIEW
+           ========================== */
+
+        const photoInput =
+            document.getElementById("photoInput");
+
+
+        if (photoInput) {
+
+            photoInput.addEventListener(
+                "change",
+                function(event) {
+
+                    const preview =
+                        document.getElementById(
+                            "photoPreview"
+                        );
+
+                    preview.innerHTML = "";
+
+                    const files =
+                        event.target.files;
+
+
+                    Array.from(files).forEach(
+                        function(file) {
+
+                            if (
+                                !file.type.startsWith(
+                                    "image/"
+                                )
+                            ) {
+
+                                return;
+
+                            }
+
+
+                            const reader =
+                                new FileReader();
+
+
+                            reader.onload =
+                                function(e) {
+
+                                    const item =
+                                        document.createElement(
+                                            "div"
+                                        );
+
+                                    item.className =
+                                        "preview-item";
+
+
+                                    item.innerHTML = `
+                                        <img
+                                            src="${e.target.result}"
+                                            alt="Selected school photo"
+                                        >
+
+                                        <button
+                                            type="button"
+                                            onclick="this.parentElement.remove()"
+                                        >
+                                            ×
+                                        </button>
+                                    `;
+
+
+                                    preview.appendChild(
+                                        item
+                                    );
+
+                                };
+
+
+                            reader.readAsDataURL(file);
+
+                        }
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* ==========================
+           LOGO PREVIEW
+           ========================== */
+
+        const logoInput =
+            document.getElementById("logoInput");
+
+
+        if (logoInput) {
+
+            logoInput.addEventListener(
+                "change",
+                function(event) {
+
+                    const file =
+                        event.target.files[0];
+
+
+                    if (!file) {
+
+                        return;
+
+                    }
+
+
+                    if (
+                        !file.type.startsWith(
+                            "image/"
+                        )
+                    ) {
+
+                        alert(
+                            "Please select an image."
+                        );
+
+                        return;
+
+                    }
+
+
+                    const reader =
+                        new FileReader();
+
+
+                    reader.onload =
+                        function(e) {
+
+                            document.getElementById(
+                                "logoPreview"
+                            ).innerHTML = `
+
+                                <p style="
+                                    margin-bottom:10px;
+                                    color:#777;
+                                ">
+                                    New Logo Preview
+                                </p>
+
+                                <img
+                                    src="${e.target.result}"
+                                    alt="New Logo Preview"
+                                >
+
+                            `;
+
+                        };
+
+
+                    reader.readAsDataURL(file);
+
+                }
+            );
+
+        }
+
+
+        /* ==========================
+           SAVE LOGO
+           ========================== */
+
+        function saveLogo() {
+
+            const file =
+                document.getElementById(
+                    "logoInput"
+                ).files[0];
+
+
+            if (!file) {
+
+                alert(
+                    "Please choose a logo first."
+                );
+
+                return;
+
+            }
+
+
+            if (
+                !file.type.startsWith("image/")
+            ) {
+
+                alert(
+                    "Please select an image file."
+                );
+
+                return;
+
+            }
+
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                function(e) {
+
+                    localStorage.setItem(
+                        "schoolLogo",
+                        e.target.result
+                    );
+
+
+                    document.getElementById(
+                        "currentLogoPreview"
+                    ).src = e.target.result;
+
+
+                    alert(
+                        "✅ School logo saved successfully!"
+                    );
+
+                };
+
+
+            reader.readAsDataURL(file);
+
+        }
+
+
+        /* ==========================
+           LOGOUT
+           ========================== */
+
+        function logout() {
+
+            sessionStorage.removeItem(
+                "editorLoggedIn"
+            );
+
+            window.location.href =
+                "editor-login.html";
+
+        }
+
+    </script>
 
 </body>
 </html>
