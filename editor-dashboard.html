@@ -349,6 +349,24 @@
             cursor: pointer;
             font-size: 18px;
         }
+        /* CLASS PHOTO PREVIEW */
+
+.class-photo-preview {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.class-photo-preview .preview-item img {
+    height: 80px;
+}
+
+.photo-limit-note {
+    font-size: 12px;
+    color: #888;
+    margin-top: 6px;
+}
 
         /* =====================================================
            LOGO
@@ -687,25 +705,110 @@
 
 
 
-        <!-- CLASSES -->
+     <!-- P1 -->
+<div class="class-editor">
+    <h3>P1</h3>
+    <div class="field">
+        <label for="p1Description">P1 Description</label>
+        <input type="text" id="p1Description" value="Building strong foundations for learning.">
+    </div>
+    <div class="field">
+        <label for="p1Photos">P1 Class Photos</label>
+        <input type="file" id="p1Photos" accept="image/*" multiple onchange="handleClassPhotoChange('P1', event)">
+        <p class="photo-limit-note">You can select up to 5 photos for this class.</p>
+        <div class="class-photo-preview" id="p1PhotoPreview"></div>
+    </div>
+</div>
 
-        <div
-            class="editor-card"
-            onclick="openSection('classes')">
+<!-- P2 -->
+<div class="class-editor">
+    <h3>P2</h3>
+    <div class="field">
+        <label for="p2Description">P2 Description</label>
+        <input type="text" id="p2Description" value="Developing confidence and essential skills.">
+    </div>
+    <div class="field">
+        <label for="p2Photos">P2 Class Photos</label>
+        <input type="file" id="p2Photos" accept="image/*" multiple onchange="handleClassPhotoChange('P2', event)">
+        <p class="photo-limit-note">You can select up to 5 photos for this class.</p>
+        <div class="class-photo-preview" id="p2PhotoPreview"></div>
+    </div>
+</div>
 
-            <div class="editor-icon">
-                🎓
-            </div>
+<!-- P3 -->
+<div class="class-editor">
+    <h3>P3</h3>
+    <div class="field">
+        <label for="p3Description">P3 Description</label>
+        <input type="text" id="p3Description" value="Strengthening knowledge and understanding.">
+    </div>
+    <div class="field">
+        <label for="p3Photos">P3 Class Photos</label>
+        <input type="file" id="p3Photos" accept="image/*" multiple onchange="handleClassPhotoChange('P3', event)">
+        <p class="photo-limit-note">You can select up to 5 photos for this class.</p>
+        <div class="class-photo-preview" id="p3PhotoPreview"></div>
+    </div>
+</div>
 
-            <h3>
-                Classes
-            </h3>
+<!-- P4 -->
+<div class="class-editor">
+    <h3>P4</h3>
+    <div class="field">
+        <label for="p4Description">P4 Description</label>
+        <input type="text" id="p4Description" value="Encouraging independent learning.">
+    </div>
+    <div class="field">
+        <label for="p4Photos">P4 Class Photos</label>
+        <input type="file" id="p4Photos" accept="image/*" multiple onchange="handleClassPhotoChange('P4', event)">
+        <p class="photo-limit-note">You can select up to 5 photos for this class.</p>
+        <div class="class-photo-preview" id="p4PhotoPreview"></div>
+    </div>
+</div>
 
-            <p>
-                Edit P1 to P7 class information.
-            </p>
+<!-- P5 -->
+<div class="class-editor">
+    <h3>P5</h3>
+    <div class="field">
+        <label for="p5Description">P5 Description</label>
+        <input type="text" id="p5Description" value="Preparing learners for greater challenges.">
+    </div>
+    <div class="field">
+        <label for="p5Photos">P5 Class Photos</label>
+        <input type="file" id="p5Photos" accept="image/*" multiple onchange="handleClassPhotoChange('P5', event)">
+        <p class="photo-limit-note">You can select up to 5 photos for this class.</p>
+        <div class="class-photo-preview" id="p5PhotoPreview"></div>
+    </div>
+</div>
 
-        </div>
+<!-- P6 -->
+<div class="class-editor">
+    <h3>P6</h3>
+    <div class="field">
+        <label for="p6Description">P6 Description</label>
+        <input type="text" id="p6Description" value="Preparing learners for upper primary.">
+    </div>
+    <div class="field">
+        <label for="p6Photos">P6 Class Photos</label>
+        <input type="file" id="p6Photos" accept="image/*" multiple onchange="handleClassPhotoChange('P6', event)">
+        <p class="photo-limit-note">You can select up to 5 photos for this class.</p>
+        <div class="class-photo-preview" id="p6PhotoPreview"></div>
+    </div>
+</div>
+
+<!-- P7 -->
+<div class="class-editor">
+    <h3>P7</h3>
+    <div class="field">
+        <label for="p7Description">P7 Description</label>
+        <input type="text" id="p7Description" value="Preparing learners for their next level.">
+    </div>
+    <div class="field">
+        <label for="p7Photos">P7 Class Photos</label>
+        <input type="file" id="p7Photos" accept="image/*" multiple onchange="handleClassPhotoChange('P7', event)">
+        <p class="photo-limit-note">You can select up to 5 photos for this class.</p>
+        <div class="class-photo-preview" id="p7PhotoPreview"></div>
+    </div>
+</div>
 
 
 
