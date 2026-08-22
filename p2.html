@@ -3,160 +3,929 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Primary Two at Abubakar Junior School - Developing confidence and essential learning skills.">
+
     <title>Primary Two | Abubakar Junior School</title>
+
     <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* ==============================
+           P2 PHOTO GALLERY
+           ============================== */
+
+        .class-photo-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 18px;
+            margin-top: 30px;
+        }
+
+        .class-photo-card {
+            background: white;
+            border-radius: 14px;
+            padding: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .class-photo {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 10px;
+            cursor: pointer;
+            display: none;
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 220px;
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            color: #888;
+            font-size: 30px;
+        }
+
+        .photo-placeholder span {
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        .photo-download {
+            display: inline-block;
+            margin-top: 10px;
+            background: #0756a8;
+            color: white;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 7px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .photo-download:hover {
+            background: #06437f;
+        }
+
+
+        /* ==============================
+           LIGHTBOX
+           ============================== */
+
+        .class-photo-lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.88);
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            z-index: 9999;
+            padding: 20px;
+        }
+
+        .class-photo-lightbox.active {
+            display: flex;
+        }
+
+        .class-photo-lightbox img {
+            max-width: 95%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .class-photo-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+
+            background: #d90429;
+            color: white;
+
+            border: none;
+
+            width: 45px;
+            height: 45px;
+
+            border-radius: 50%;
+
+            font-size: 30px;
+            cursor: pointer;
+
+            z-index: 10000;
+        }
+
+
+        /* ==============================
+           MOBILE
+           ============================== */
+
+        @media (max-width: 1000px) {
+
+            .class-photo-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+        }
+
+        @media (max-width: 700px) {
+
+            .class-photo-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 480px) {
+
+            .class-photo-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .class-photo,
+            .photo-placeholder {
+                height: 240px;
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
+
+<!-- ==============================
+     HEADER
+     ============================== -->
+
 <header class="header">
+
     <div class="container nav-container">
 
         <a href="index.html" class="logo">
-            <div class="logo-icon">AJS</div>
-            <div>
-                <strong>Abubakar Junior School</strong>
-                <small>Education • Discipline • Excellence</small>
+
+            <div class="logo-icon">
+                AJS
             </div>
+
+            <div>
+                <strong>
+                    Abubakar Junior School
+                </strong>
+
+                <small>
+                    Education • Discipline • Excellence
+                </small>
+            </div>
+
         </a>
 
+
         <nav>
-            <a href="index.html">Home</a>
-            <a href="index.html#about">About</a>
-            <a href="index.html#academics">Academics</a>
-            <a href="index.html#classes">Classes</a>
-            <a href="index.html#contact">Contact</a>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="index.html#about">
+                About
+            </a>
+
+            <a href="index.html#academics">
+                Academics
+            </a>
+
+            <a href="index.html#classes">
+                Classes
+            </a>
+
+            <a href="index.html#contact">
+                Contact
+            </a>
+
         </nav>
 
     </div>
+
 </header>
 
+
+
+<!-- ==============================
+     HERO
+     ============================== -->
+
 <section class="hero" style="min-height:400px;">
+
     <div class="container hero-content">
+
         <div class="hero-text">
 
-            <span class="welcome">PRIMARY TWO</span>
+            <span class="welcome">
+                PRIMARY TWO
+            </span>
 
             <h1>
+
                 Welcome to
-                <span>Primary Two</span>
+
+                <span>
+                    Primary Two
+                </span>
+
             </h1>
 
             <p>
-                A strong beginning for confident, curious and responsible
-                learners at Abubakar Junior School.
+                Developing confidence, knowledge and essential skills
+                for successful learning at Abubakar Junior School.
             </p>
 
             <div class="hero-buttons">
-                <a href="index.html#classes" class="btn secondary">
+
+                <a
+                    href="index.html#classes"
+                    class="btn secondary"
+                >
                     Back to Classes
                 </a>
+
             </div>
 
         </div>
+
     </div>
+
 </section>
+
+
+
+<!-- ==============================
+     INTRODUCTION
+     ============================== -->
 
 <section class="section">
+
     <div class="container two-column">
 
+
         <div>
-            <span class="section-label">PRIMARY TWO</span>
-            <h2>Building Strong Foundations</h2>
+
+            <span class="section-label">
+                PRIMARY TWO
+            </span>
+
+            <h2>
+                Developing Confidence and Essential Skills
+            </h2>
 
             <p>
-                Primary Two is an important stage where learners develop
-                the foundations needed for successful education.
+                Primary Two builds on the foundations developed in
+                Primary One and helps learners become more confident
+                in their learning.
             </p>
 
             <p>
-                Our teachers support learners as they develop literacy,
-                numeracy, communication, social skills and good habits.
+                Our teachers guide learners in reading, writing,
+                mathematics, communication, social development and
+                practical activities.
             </p>
+
         </div>
 
+
         <div class="academic-card">
-            <h3>Key Areas of Learning</h3>
+
+            <h3>
+                Key Areas of Learning
+            </h3>
 
             <div class="feature-list">
-                <div>✓ Literacy</div>
-                <div>✓ Numeracy</div>
-                <div>✓ Science</div>
-                <div>✓ Social Studies</div>
-                <div>✓ Creative Activities</div>
-                <div>✓ Physical Education</div>
+
+                <div>
+                    ✓ Literacy
+                </div>
+
+                <div>
+                    ✓ Numeracy
+                </div>
+
+                <div>
+                    ✓ Science
+                </div>
+
+                <div>
+                    ✓ Social Studies
+                </div>
+
+                <div>
+                    ✓ Creative Activities
+                </div>
+
+                <div>
+                    ✓ Physical Education
+                </div>
+
             </div>
+
         </div>
 
     </div>
+
 </section>
 
+
+
+<!-- ==============================
+     LEARNING EXPERIENCE
+     ============================== -->
+
 <section class="light-section section">
+
     <div class="container">
 
         <div class="section-heading">
-            <span class="section-label">LEARNING EXPERIENCE</span>
-            <h2>What Learners Develop</h2>
+
+            <span class="section-label">
+                LEARNING EXPERIENCE
+            </span>
+
+            <h2>
+                What Learners Develop
+            </h2>
+
         </div>
+
 
         <div class="academic-grid">
 
-            <div class="academic-card">
-                <div class="academic-icon">📖</div>
-                <h3>Reading</h3>
-                <p>
-                    Developing early reading and language skills.
-                </p>
-            </div>
 
             <div class="academic-card">
-                <div class="academic-icon">🔢</div>
-                <h3>Numeracy</h3>
+
+                <div class="academic-icon">
+                    📖
+                </div>
+
+                <h3>
+                    Reading & Writing
+                </h3>
+
                 <p>
-                    Developing understanding of numbers and basic mathematics.
+                    Strengthening reading, writing and communication skills.
                 </p>
+
             </div>
 
+
             <div class="academic-card">
-                <div class="academic-icon">🤝</div>
-                <h3>Social Skills</h3>
+
+                <div class="academic-icon">
+                    🔢
+                </div>
+
+                <h3>
+                    Mathematics
+                </h3>
+
                 <p>
-                    Learning cooperation, respect and responsibility.
+                    Building stronger understanding of numbers,
+                    operations and problem-solving.
                 </p>
+
             </div>
+
+
+            <div class="academic-card">
+
+                <div class="academic-icon">
+                    🤝
+                </div>
+
+                <h3>
+                    Social Development
+                </h3>
+
+                <p>
+                    Developing cooperation, respect, confidence
+                    and responsibility.
+                </p>
+
+            </div>
+
 
         </div>
 
     </div>
+
 </section>
 
+
+
+<!-- ==============================
+     P2 PHOTO GALLERY
+     ============================== -->
+
+<section class="section" id="p2-gallery">
+
+    <div class="container">
+
+
+        <div class="section-heading">
+
+            <span class="section-label">
+                PRIMARY TWO
+            </span>
+
+            <h2>
+                Life in Primary Two
+            </h2>
+
+            <p>
+                Photos of learning, activities and memorable moments
+                in Primary Two.
+            </p>
+
+        </div>
+
+
+        <div class="class-photo-grid">
+
+
+            <!-- PHOTO 1 -->
+
+            <div class="class-photo-card">
+
+                <img
+                    id="p2-photo-1"
+                    src=""
+                    alt="Primary Two Photo 1"
+                    class="class-photo"
+                    onclick="openClassPhoto(this.src)"
+                >
+
+                <div
+                    class="photo-placeholder"
+                    id="p2-placeholder-1"
+                >
+
+                    📷
+
+                    <span>
+                        Photo 1
+                    </span>
+
+                </div>
+
+                <a
+                    id="p2-download-1"
+                    class="photo-download"
+                    href="#"
+                    download
+                    style="display:none;"
+                >
+                    ⬇ Download Photo
+                </a>
+
+            </div>
+
+
+
+            <!-- PHOTO 2 -->
+
+            <div class="class-photo-card">
+
+                <img
+                    id="p2-photo-2"
+                    src=""
+                    alt="Primary Two Photo 2"
+                    class="class-photo"
+                    onclick="openClassPhoto(this.src)"
+                >
+
+                <div
+                    class="photo-placeholder"
+                    id="p2-placeholder-2"
+                >
+
+                    📷
+
+                    <span>
+                        Photo 2
+                    </span>
+
+                </div>
+
+                <a
+                    id="p2-download-2"
+                    class="photo-download"
+                    href="#"
+                    download
+                    style="display:none;"
+                >
+                    ⬇ Download Photo
+                </a>
+
+            </div>
+
+
+
+            <!-- PHOTO 3 -->
+
+            <div class="class-photo-card">
+
+                <img
+                    id="p2-photo-3"
+                    src=""
+                    alt="Primary Two Photo 3"
+                    class="class-photo"
+                    onclick="openClassPhoto(this.src)"
+                >
+
+                <div
+                    class="photo-placeholder"
+                    id="p2-placeholder-3"
+                >
+
+                    📷
+
+                    <span>
+                        Photo 3
+                    </span>
+
+                </div>
+
+                <a
+                    id="p2-download-3"
+                    class="photo-download"
+                    href="#"
+                    download
+                    style="display:none;"
+                >
+                    ⬇ Download Photo
+                </a>
+
+            </div>
+
+
+
+            <!-- PHOTO 4 -->
+
+            <div class="class-photo-card">
+
+                <img
+                    id="p2-photo-4"
+                    src=""
+                    alt="Primary Two Photo 4"
+                    class="class-photo"
+                    onclick="openClassPhoto(this.src)"
+                >
+
+                <div
+                    class="photo-placeholder"
+                    id="p2-placeholder-4"
+                >
+
+                    📷
+
+                    <span>
+                        Photo 4
+                    </span>
+
+                </div>
+
+                <a
+                    id="p2-download-4"
+                    class="photo-download"
+                    href="#"
+                    download
+                    style="display:none;"
+                >
+                    ⬇ Download Photo
+                </a>
+
+            </div>
+
+
+
+            <!-- PHOTO 5 -->
+
+            <div class="class-photo-card">
+
+                <img
+                    id="p2-photo-5"
+                    src=""
+                    alt="Primary Two Photo 5"
+                    class="class-photo"
+                    onclick="openClassPhoto(this.src)"
+                >
+
+                <div
+                    class="photo-placeholder"
+                    id="p2-placeholder-5"
+                >
+
+                    📷
+
+                    <span>
+                        Photo 5
+                    </span>
+
+                </div>
+
+                <a
+                    id="p2-download-5"
+                    class="photo-download"
+                    href="#"
+                    download
+                    style="display:none;"
+                >
+                    ⬇ Download Photo
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ==============================
+     PHOTO LIGHTBOX
+     ============================== -->
+
+<div
+    id="classPhotoLightbox"
+    class="class-photo-lightbox"
+    onclick="closeClassPhoto()"
+>
+
+    <button
+        class="class-photo-close"
+        onclick="event.stopPropagation(); closeClassPhoto();"
+        aria-label="Close photo"
+    >
+        ×
+    </button>
+
+    <img
+        id="classLightboxImage"
+        src=""
+        alt="Enlarged Primary Two photo"
+        onclick="event.stopPropagation();"
+    >
+
+</div>
+
+
+
+<!-- ==============================
+     FOOTER
+     ============================== -->
+
 <footer>
+
     <div class="container footer-grid">
 
         <div>
-            <div class="footer-logo">Abubakar Junior School</div>
-            <p>Education • Discipline • Excellence</p>
+
+            <div class="footer-logo">
+                Abubakar Junior School
+            </div>
+
+            <p>
+                Education • Discipline • Excellence
+            </p>
+
         </div>
 
-        <div>
-            <h3>Quick Links</h3>
-            <a href="index.html">Home</a>
-            <a href="index.html#about">About</a>
-            <a href="index.html#classes">Classes</a>
-        </div>
 
         <div>
-            <h3>Contact</h3>
-            <p>📍 Uganda</p>
+
+            <h3>
+                Quick Links
+            </h3>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="index.html#about">
+                About
+            </a>
+
+            <a href="index.html#classes">
+                Classes
+            </a>
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                Contact
+            </h3>
+
+            <p>
+                📍 Uganda
+            </p>
+
         </div>
 
     </div>
+
 
     <div class="copyright">
-        © 2026 Abubakar Junior School. All Rights Reserved.
+
+        © 2026 Abubakar Junior School.
+        All Rights Reserved.
+
     </div>
+
 </footer>
+
+
+
+<!-- ==============================
+     P2 PHOTO JAVASCRIPT
+     ============================== -->
+
+<script>
+
+    /* ==========================
+       LOAD P2 PHOTOS
+       ========================== */
+
+    function loadP2Photos() {
+
+        for (
+            let i = 1;
+            i <= 5;
+            i++
+        ) {
+
+            const photo =
+                localStorage.getItem(
+                    "p2Photo" + i
+                );
+
+
+            const image =
+                document.getElementById(
+                    "p2-photo-" + i
+                );
+
+
+            const placeholder =
+                document.getElementById(
+                    "p2-placeholder-" + i
+                );
+
+
+            const download =
+                document.getElementById(
+                    "p2-download-" + i
+                );
+
+
+            if (photo) {
+
+                image.src = photo;
+
+                image.style.display =
+                    "block";
+
+                placeholder.style.display =
+                    "none";
+
+                download.href =
+                    photo;
+
+                download.style.display =
+                    "inline-block";
+
+            }
+
+            else {
+
+                image.style.display =
+                    "none";
+
+                placeholder.style.display =
+                    "flex";
+
+                download.style.display =
+                    "none";
+
+            }
+
+        }
+
+    }
+
+
+
+    /* ==========================
+       OPEN PHOTO
+       ========================== */
+
+    function openClassPhoto(src) {
+
+        if (!src) {
+            return;
+        }
+
+        const lightbox =
+            document.getElementById(
+                "classPhotoLightbox"
+            );
+
+        const image =
+            document.getElementById(
+                "classLightboxImage"
+            );
+
+        image.src = src;
+
+        lightbox.classList.add(
+            "active"
+        );
+
+    }
+
+
+
+    /* ==========================
+       CLOSE PHOTO
+       ========================== */
+
+    function closeClassPhoto() {
+
+        const lightbox =
+            document.getElementById(
+                "classPhotoLightbox"
+            );
+
+        lightbox.classList.remove(
+            "active"
+        );
+
+        document.getElementById(
+            "classLightboxImage"
+        ).src = "";
+
+    }
+
+
+
+    /* ==========================
+       ESC KEY
+       ========================== */
+
+    document.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Escape"
+            ) {
+
+                closeClassPhoto();
+
+            }
+
+        }
+    );
+
+
+
+    /* ==========================
+       START
+       ========================== */
+
+    loadP2Photos();
+
+</script>
+
 
 </body>
 </html>
-
