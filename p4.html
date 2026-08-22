@@ -3,165 +3,820 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Primary Four at Abubakar Junior School - Encouraging independent learning.">
+
     <title>Primary Four | Abubakar Junior School</title>
+
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* ==========================
+           P4 PHOTO GALLERY
+           ========================== */
+
+        .class-photo-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 18px;
+            margin-top: 30px;
+        }
+
+        .class-photo-card {
+            background: white;
+            border-radius: 14px;
+            padding: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .class-photo {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 10px;
+            cursor: pointer;
+            display: none;
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 220px;
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            color: #888;
+            font-size: 30px;
+        }
+
+        .photo-placeholder span {
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        .photo-download {
+            display: inline-block;
+            margin-top: 10px;
+            background: #0756a8;
+            color: white;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 7px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .photo-download:hover {
+            background: #06437f;
+        }
+
+        /* ==========================
+           PHOTO LIGHTBOX
+           ========================== */
+
+        .class-photo-lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.88);
+
+            display: none;
+            align-items: center;
+            justify-content: center;
+
+            z-index: 9999;
+            padding: 20px;
+        }
+
+        .class-photo-lightbox.active {
+            display: flex;
+        }
+
+        .class-photo-lightbox img {
+            max-width: 95%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .class-photo-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+
+            background: #d90429;
+            color: white;
+
+            border: none;
+
+            width: 45px;
+            height: 45px;
+
+            border-radius: 50%;
+
+            font-size: 30px;
+            cursor: pointer;
+
+            z-index: 10000;
+        }
+
+        /* ==========================
+           MOBILE
+           ========================== */
+
+        @media (max-width: 1000px) {
+
+            .class-photo-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+        }
+
+        @media (max-width: 700px) {
+
+            .class-photo-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 480px) {
+
+            .class-photo-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .class-photo,
+            .photo-placeholder {
+                height: 240px;
+            }
+
+        }
+    </style>
 </head>
 
 <body>
 
+<!-- ==========================
+     HEADER
+     ========================== -->
+
 <header class="header">
+
     <div class="container nav-container">
 
         <a href="index.html" class="logo">
-            <div class="logo-icon">AJS</div>
-            <div>
-                <strong>Abubakar Junior School</strong>
-                <small>Education • Discipline • Excellence</small>
+
+            <div class="logo-icon">
+                AJS
             </div>
+
+            <div>
+
+                <strong>
+                    Abubakar Junior School
+                </strong>
+
+                <small>
+                    Education • Discipline • Excellence
+                </small>
+
+            </div>
+
         </a>
 
+
         <nav>
-            <a href="index.html">Home</a>
-            <a href="index.html#about">About</a>
-            <a href="index.html#academics">Academics</a>
-            <a href="index.html#classes">Classes</a>
-            <a href="index.html#contact">Contact</a>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="index.html#about">
+                About
+            </a>
+
+            <a href="index.html#academics">
+                Academics
+            </a>
+
+            <a href="index.html#classes">
+                Classes
+            </a>
+
+            <a href="index.html#contact">
+                Contact
+            </a>
+
         </nav>
 
     </div>
+
 </header>
 
+
+<!-- ==========================
+     HERO
+     ========================== -->
+
 <section class="hero" style="min-height:400px;">
+
     <div class="container hero-content">
+
         <div class="hero-text">
 
-            <span class="welcome">PRIMARY FOUR</span>
+            <span class="welcome">
+                PRIMARY FOUR
+            </span>
 
             <h1>
                 Welcome to
-                <span>Primary Four</span>
+                <span>
+                    Primary Four
+                </span>
             </h1>
 
             <p>
-                Encouraging independent learning, deeper understanding
-                and strong academic development.
+                Encouraging independent learning, creativity and
+                confidence at Abubakar Junior School.
             </p>
 
             <div class="hero-buttons">
-                <a href="index.html#classes" class="btn secondary">
+
+                <a
+                    href="index.html#classes"
+                    class="btn secondary"
+                >
                     Back to Classes
                 </a>
+
             </div>
 
         </div>
+
     </div>
+
 </section>
 
+
+<!-- ==========================
+     INTRODUCTION
+     ========================== -->
+
 <section class="section">
+
     <div class="container two-column">
 
         <div>
-            <span class="section-label">PRIMARY FOUR</span>
-            <h2>Encouraging Independent Learning</h2>
+
+            <span class="section-label">
+                PRIMARY FOUR
+            </span>
+
+            <h2>
+                Encouraging Independent Learning
+            </h2>
 
             <p>
-                Primary Four is an important stage where learners begin
-                to develop greater independence, confidence and deeper
-                understanding of their subjects.
+                Primary Four is an important stage in which learners
+                strengthen their academic knowledge while becoming
+                more independent in their learning.
             </p>
 
             <p>
-                Our teachers guide learners to apply knowledge,
+                Our teachers guide learners to think critically,
                 communicate effectively, solve problems and develop
-                responsible study habits.
+                positive attitudes towards education.
             </p>
+
         </div>
 
+
         <div class="academic-card">
-            <h3>Key Areas of Learning</h3>
+
+            <h3>
+                Key Areas of Learning
+            </h3>
 
             <div class="feature-list">
-                <div>✓ English Language</div>
-                <div>✓ Mathematics</div>
-                <div>✓ Science</div>
-                <div>✓ Social Studies</div>
-                <div>✓ Religious Education</div>
-                <div>✓ Physical Education</div>
-                <div>✓ Creative Activities</div>
+
+                <div>
+                    ✓ English
+                </div>
+
+                <div>
+                    ✓ Mathematics
+                </div>
+
+                <div>
+                    ✓ Science
+                </div>
+
+                <div>
+                    ✓ Social Studies
+                </div>
+
+                <div>
+                    ✓ Religious Education
+                </div>
+
+                <div>
+                    ✓ Creative Activities
+                </div>
+
+                <div>
+                    ✓ Physical Education
+                </div>
+
             </div>
+
         </div>
 
     </div>
+
 </section>
 
+
+<!-- ==========================
+     LEARNING EXPERIENCE
+     ========================== -->
+
 <section class="light-section section">
+
     <div class="container">
 
         <div class="section-heading">
-            <span class="section-label">LEARNING EXPERIENCE</span>
-            <h2>What Learners Develop</h2>
+
+            <span class="section-label">
+                LEARNING EXPERIENCE
+            </span>
+
+            <h2>
+                What Learners Develop
+            </h2>
+
         </div>
+
 
         <div class="academic-grid">
 
-            <div class="academic-card">
-                <div class="academic-icon">📘</div>
-                <h3>Academic Growth</h3>
-                <p>
-                    Building stronger understanding across the major
-                    areas of learning.
-                </p>
-            </div>
 
             <div class="academic-card">
-                <div class="academic-icon">💡</div>
-                <h3>Problem Solving</h3>
+
+                <div class="academic-icon">
+                    🧠
+                </div>
+
+                <h3>
+                    Independent Thinking
+                </h3>
+
                 <p>
-                    Encouraging learners to think critically and
-                    find practical solutions.
+                    Learners are encouraged to think critically,
+                    ask questions and solve problems.
                 </p>
+
             </div>
 
+
             <div class="academic-card">
-                <div class="academic-icon">🌟</div>
-                <h3>Confidence</h3>
+
+                <div class="academic-icon">
+                    📚
+                </div>
+
+                <h3>
+                    Academic Skills
+                </h3>
+
                 <p>
-                    Developing confident learners who participate
-                    actively in school life.
+                    Strengthening knowledge and understanding
+                    across different areas of learning.
                 </p>
+
+            </div>
+
+
+            <div class="academic-card">
+
+                <div class="academic-icon">
+                    🤝
+                </div>
+
+                <h3>
+                    Responsibility
+                </h3>
+
+                <p>
+                    Developing discipline, teamwork, respect
+                    and responsibility.
+                </p>
+
             </div>
 
         </div>
 
     </div>
+
 </section>
 
+
+<!-- ==========================
+     P4 PHOTO GALLERY
+     ========================== -->
+
+<section class="section" id="p4-gallery">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span class="section-label">
+                PRIMARY FOUR
+            </span>
+
+            <h2>
+                Life in Primary Four
+            </h2>
+
+            <p>
+                Photos of learning, activities and memorable
+                moments in Primary Four.
+            </p>
+
+        </div>
+
+
+        <div class="class-photo-grid">
+
+
+            <!-- PHOTO 1 -->
+
+            <div class="class-photo-card">
+
+                <img
+                    id="p4-photo-1"
+                    src=""
+                    alt="Primary Four Photo 1"
+                    class="class-photo"
+                    onclick="openClassPhoto(this.src)"
+                >
+
+                <div
+                    class="photo-placeholder"
+                    id="p4-placeholder-1"
+                >
+                    📷
+                    <span>
+                        Photo 1
+                    </span>
+                </div>
+
+                <a
+                    id="p4-download-1"
+                    class="photo-download"
+                    href="#"
+                    download
+                    style="display:none;"
+                >
+                    ⬇ Download Photo
+                </a>
+
+            </div>
+
+
+            <!-- PHOTO 2 -->
+
+            <div class="class-photo-card">
+
+                <img
+                    id="p4-photo-2"
+                    src=""
+                    alt="Primary Four Photo 2"
+                    class="class-photo"
+                    onclick="openClassPhoto(this.src)"
+                >
+
+                <div
+                    class="photo-placeholder"
+                    id="p4-placeholder-2"
+                >
+                    📷
+                    <span>
+                        Photo 2
+                    </span>
+                </div>
+
+                <a
+                    id="p4-download-2"
+                    class="photo-download"
+                    href="#"
+                    download
+                    style="display:none;"
+                >
+                    ⬇ Download Photo
+                </a>
+
+            </div>
+
+
+            <!-- PHOTO 3 -->
+
+            <div class="class-photo-card">
+
+                <img
+                    id="p4-photo-3"
+                    src=""
+                    alt="Primary Four Photo 3"
+                    class="class-photo"
+                    onclick="openClassPhoto(this.src)"
+                >
+
+                <div
+                    class="photo-placeholder"
+                    id="p4-placeholder-3"
+                >
+                    📷
+                    <span>
+                        Photo 3
+                    </span>
+                </div>
+
+                <a
+                    id="p4-download-3"
+                    class="photo-download"
+                    href="#"
+                    download
+                    style="display:none;"
+                >
+                    ⬇ Download Photo
+                </a>
+
+            </div>
+
+
+            <!-- PHOTO 4 -->
+
+            <div class="class-photo-card">
+
+                <img
+                    id="p4-photo-4"
+                    src=""
+                    alt="Primary Four Photo 4"
+                    class="class-photo"
+                    onclick="openClassPhoto(this.src)"
+                >
+
+                <div
+                    class="photo-placeholder"
+                    id="p4-placeholder-4"
+                >
+                    📷
+                    <span>
+                        Photo 4
+                    </span>
+                </div>
+
+                <a
+                    id="p4-download-4"
+                    class="photo-download"
+                    href="#"
+                    download
+                    style="display:none;"
+                >
+                    ⬇ Download Photo
+                </a>
+
+            </div>
+
+
+            <!-- PHOTO 5 -->
+
+            <div class="class-photo-card">
+
+                <img
+                    id="p4-photo-5"
+                    src=""
+                    alt="Primary Four Photo 5"
+                    class="class-photo"
+                    onclick="openClassPhoto(this.src)"
+                >
+
+                <div
+                    class="photo-placeholder"
+                    id="p4-placeholder-5"
+                >
+                    📷
+                    <span>
+                        Photo 5
+                    </span>
+                </div>
+
+                <a
+                    id="p4-download-5"
+                    class="photo-download"
+                    href="#"
+                    download
+                    style="display:none;"
+                >
+                    ⬇ Download Photo
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==========================
+     PHOTO LIGHTBOX
+     ========================== -->
+
+<div
+    id="classPhotoLightbox"
+    class="class-photo-lightbox"
+    onclick="closeClassPhoto()"
+>
+
+    <button
+        class="class-photo-close"
+        onclick="event.stopPropagation(); closeClassPhoto();"
+    >
+        ×
+    </button>
+
+    <img
+        id="classLightboxImage"
+        src=""
+        alt="Enlarged Primary Four photo"
+        onclick="event.stopPropagation();"
+    >
+
+</div>
+
+
+<!-- ==========================
+     FOOTER
+     ========================== -->
+
 <footer>
+
     <div class="container footer-grid">
 
         <div>
-            <div class="footer-logo">Abubakar Junior School</div>
-            <p>Education • Discipline • Excellence</p>
+
+            <div class="footer-logo">
+                Abubakar Junior School
+            </div>
+
+            <p>
+                Education • Discipline • Excellence
+            </p>
+
         </div>
 
-        <div>
-            <h3>Quick Links</h3>
-            <a href="index.html">Home</a>
-            <a href="index.html#about">About</a>
-            <a href="index.html#classes">Classes</a>
-        </div>
 
         <div>
-            <h3>Contact</h3>
-            <p>📍 Uganda</p>
+
+            <h3>
+                Quick Links
+            </h3>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="index.html#about">
+                About
+            </a>
+
+            <a href="index.html#classes">
+                Classes
+            </a>
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                Contact
+            </h3>
+
+            <p>
+                📍 Uganda
+            </p>
+
         </div>
 
     </div>
+
 
     <div class="copyright">
-        © 2026 Abubakar Junior School. All Rights Reserved.
+
+        © 2026 Abubakar Junior School.
+        All Rights Reserved.
+
     </div>
+
 </footer>
+
+
+<!-- ==========================
+     P4 PHOTO JAVASCRIPT
+     ========================== -->
+
+<script>
+
+function loadP4Photos() {
+
+    for (let i = 1; i <= 5; i++) {
+
+        const photo =
+            localStorage.getItem("p4Photo" + i);
+
+        const image =
+            document.getElementById("p4-photo-" + i);
+
+        const placeholder =
+            document.getElementById("p4-placeholder-" + i);
+
+        const download =
+            document.getElementById("p4-download-" + i);
+
+
+        if (photo) {
+
+            image.src = photo;
+
+            image.style.display = "block";
+
+            placeholder.style.display = "none";
+
+            download.href = photo;
+
+            download.style.display = "inline-block";
+
+        }
+
+    }
+
+}
+
+
+function openClassPhoto(src) {
+
+    if (!src) {
+        return;
+    }
+
+    document.getElementById(
+        "classLightboxImage"
+    ).src = src;
+
+    document.getElementById(
+        "classPhotoLightbox"
+    ).classList.add("active");
+
+}
+
+
+function closeClassPhoto() {
+
+    document.getElementById(
+        "classPhotoLightbox"
+    ).classList.remove("active");
+
+    document.getElementById(
+        "classLightboxImage"
+    ).src = "";
+
+}
+
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (event.key === "Escape") {
+            closeClassPhoto();
+        }
+
+    }
+);
+
+
+loadP4Photos();
+
+</script>
 
 </body>
 </html>
