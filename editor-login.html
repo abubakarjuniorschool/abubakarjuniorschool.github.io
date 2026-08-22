@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Editor Login | Abubakar Junior School</title>
 
     <style>
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -32,7 +34,7 @@
             background: white;
             border-radius: 18px;
             padding: 35px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
         }
 
         .logo {
@@ -92,7 +94,7 @@
         .field input:focus {
             outline: none;
             border-color: #0756a8;
-            box-shadow: 0 0 0 3px rgba(7, 86, 168, 0.1);
+            box-shadow: 0 0 0 3px rgba(7,86,168,0.1);
         }
 
         .login-btn {
@@ -145,11 +147,15 @@
         }
 
         @media (max-width: 500px) {
+
             .login-card {
                 padding: 25px 20px;
             }
+
         }
+
     </style>
+
 </head>
 
 <body>
@@ -177,9 +183,10 @@
 
         <div
             class="error-message"
-            id="errorMessage"
-        >
+            id="errorMessage">
+
             ❌ Incorrect editor name or password.
+
         </div>
 
 
@@ -196,8 +203,7 @@
                     id="editorName"
                     placeholder="Enter editor name"
                     autocomplete="username"
-                    required
-                >
+                    required>
 
             </div>
 
@@ -213,17 +219,17 @@
                     id="editorPassword"
                     placeholder="Enter password"
                     autocomplete="current-password"
-                    required
-                >
+                    required>
 
             </div>
 
 
             <button
                 type="submit"
-                class="login-btn"
-            >
+                class="login-btn">
+
                 LOGIN TO EDITOR
+
             </button>
 
         </form>
@@ -231,14 +237,17 @@
 
         <a
             href="index.html"
-            class="back-link"
-        >
+            class="back-link">
+
             ← Back to School Website
+
         </a>
 
 
         <div class="security-note">
+
             Authorized school editors only.
+
         </div>
 
     </div>
@@ -248,106 +257,101 @@
 
 <script>
 
-    function loginEditor(event) {
+function loginEditor(event) {
 
-        event.preventDefault();
-
-
-        const name =
-            document
-                .getElementById("editorName")
-                .value
-                .trim()
-                .toUpperCase();
+    event.preventDefault();
 
 
-        const password =
-            document
-                .getElementById("editorPassword")
-                .value;
+    const name =
+        document
+            .getElementById("editorName")
+            .value
+            .trim()
+            .toUpperCase();
 
 
-        const errorMessage =
-            document.getElementById(
-                "errorMessage"
-            );
+    const password =
+        document
+            .getElementById("editorPassword")
+            .value;
+
+
+    const errorMessage =
+        document.getElementById(
+            "errorMessage"
+        );
+
+
+    /*
+     * CURRENT EDITOR ACCOUNT
+     */
+
+    const correctName =
+        "ABUBAKAR";
+
+
+    const correctPassword =
+        "AJS123456";
+
+
+    /*
+     * CHECK LOGIN
+     */
+
+    if (
+        name === correctName &&
+        password === correctPassword
+    ) {
+
+        sessionStorage.setItem(
+            "editorLoggedIn",
+            "true"
+        );
+
+
+        sessionStorage.setItem(
+            "editorName",
+            "ABUBAKAR"
+        );
 
 
         /*
-         * CURRENT EDITOR ACCOUNT
+         * IMPORTANT:
+         *
+         * The actual dashboard file is:
+         *
+         * editor-dashboard.html
          */
 
-        const correctName =
-            "ABUBAKAR";
-
-
-        const correctPassword =
-            "AJS123456";
-
-
-        if (
-            name === correctName &&
-            password === correctPassword
-        ) {
-
-            sessionStorage.setItem(
-                "editorLoggedIn",
-                "true"
-            );
-
-            sessionStorage.setItem(
-                "editorName",
-                "ABUBAKAR"
-            );
-
-
-            window.location.href =
-                "editor.html";
-
-        }
-
-        else {
-
-            errorMessage.style.display =
-                "block";
-
-
-            document
-                .getElementById(
-                    "editorPassword"
-                )
-                .value = "";
-
-
-            document
-                .getElementById(
-                    "editorPassword"
-                )
-                .focus();
-
-        }
+        window.location.href =
+            "editor-dashboard.html";
 
     }
+
+    else {
+
+        errorMessage.style.display =
+            "block";
+
+
+        document
+            .getElementById(
+                "editorPassword"
+            )
+            .value = "";
+
+
+        document
+            .getElementById(
+                "editorPassword"
+            )
+            .focus();
+
+    }
+
+}
 
 </script>
 
 </body>
 </html>
-<input
-    type="text"
-    id="editorName"
-    placeholder="Editor Name"
->
-
-<input
-    type="password"
-    id="editorPassword"
-    placeholder="Password"
->
-
-<button
-    type="button"
-    onclick="loginEditor()"
->
-    Login
-</button>
