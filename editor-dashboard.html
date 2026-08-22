@@ -1956,6 +1956,61 @@ let pendingWebsiteData = {};
 let selectedGalleryFiles = [];
 
 let selectedLogoFile = null;
+    let selectedClassPhotos = {
+    P1: [], P2: [], P3: [], P4: [], P5: [], P6: [], P7: []
+};
+
+
+function handleClassPhotoChange(classId, event) {
+
+    let files = Array.from(event.target.files).filter(function(file) {
+        return file.type.startsWith("image/");
+    });
+
+    if (files.length > 5) {
+        showStatus(
+            "You can only add up to 5 photos per class. Only the first 5 were kept.",
+            "error"
+        );
+        files = files.slice(0, 5);
+    }
+
+    selectedClassPhotos[classId] = files;
+    renderClassPhotoPreview(classId);
+}
+
+
+function renderClassPhotoPreview(classId) {
+
+    const preview = document.getElementById(classId.toLowerCase() + "PhotoPreview");
+    preview.innerHTML = "";
+
+    selectedClassPhotos[classId].forEach(function(file, index) {
+
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+
+            const item = document.createElement("div");
+            item.className = "preview-item";
+
+            item.innerHTML = `
+                <img src="${e.target.result}" alt="${classId} class photo">
+                <button type="button" onclick="removeClassPhoto('${classId}', ${index})">×</button>
+            `;
+
+            preview.appendChild(item);
+        };
+
+        reader.readAsDataURL(file);
+    });
+}
+
+
+function removeClassPhoto(classId, index) {
+    selectedClassPhotos[classId].splice(index, 1);
+    renderClassPhotoPreview(classId);
+}
 
 
 
@@ -2281,7 +2336,44 @@ function markSectionEdited(sectionName) {
 function prepareSection(sectionName) {
 
     const freshData =
-        collectWebsiteData();
+                classes: {
+
+            P1: {
+                description: document.getElementById("p1Description").value,
+                photoCount: selectedClassPhotos.P1.length
+            },
+
+            P2: {
+                description: document.getElementById("p2Description").value,
+                photoCount: selectedClassPhotos.P2.length
+            },
+
+            P3: {
+                description: document.getElementById("p3Description").value,
+                photoCount: selectedClassPhotos.P3.length
+            },
+
+            P4: {
+                description: document.getElementById("p4Description").value,
+                photoCount: selectedClassPhotos.P4.length
+            },
+
+            P5: {
+                description: document.getElementById("p5Description").value,
+                photoCount: selectedClassPhotos.P5.length
+            },
+
+            P6: {
+                description: document.getElementById("p6Description").value,
+                photoCount: selectedClassPhotos.P6.length
+            },
+
+            P7: {
+                description: document.getElementById("p7Description").value,
+                photoCount: selectedClassPhotos.P7.length
+            }
+
+        },
 
 
     pendingWebsiteData =
