@@ -133,6 +133,11 @@
             border-color: #0756a8;
         }
 
+        .editor-card.publish-card {
+            background: #eafbf1;
+            border-color: #bde5c8;
+        }
+
         .editor-icon {
             font-size: 35px;
             margin-bottom: 12px;
@@ -411,6 +416,16 @@
 
         .publishing-notice strong {
             color: #8a5a00;
+        }
+
+        .pending-summary {
+            background: #eef6ff;
+            border: 1px solid #cfe3f7;
+            padding: 16px 18px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #0756a8;
         }
 
         /* =====================================================
@@ -780,6 +795,29 @@
             <p>
                 Change the school logo displayed
                 across the website.
+            </p>
+
+        </div>
+
+
+
+        <!-- PUBLISH (was missing — now reachable from the grid) -->
+
+        <div
+            class="editor-card publish-card"
+            onclick="openSection('publishing')">
+
+            <div class="editor-icon">
+                🚀
+            </div>
+
+            <h3>
+                Publish Changes
+            </h3>
+
+            <p>
+                Review everything you've prepared
+                and publish it to the live website.
             </p>
 
         </div>
@@ -1705,6 +1743,17 @@
         </div>
 
 
+        <div
+            class="pending-summary"
+            id="pendingSummary">
+
+            No changes prepared yet. Go back to
+            the dashboard, edit a section, and
+            click its Save button first.
+
+        </div>
+
+
         <div class="button-row">
 
             <button
@@ -1839,6 +1888,13 @@ function openSection(sectionId) {
             behavior: "smooth",
             block: "start"
         });
+
+    }
+
+
+    if (sectionId === "publishing") {
+
+        updatePendingSummary();
 
     }
 
@@ -2078,21 +2134,62 @@ function collectWebsiteData() {
 
 
 /* =====================================================
+   TRACK EDITED SECTIONS
+   (fixed: previously a single value that got
+   silently overwritten — now a running list so
+   nothing prepared earlier gets lost)
+   ===================================================== */
+
+function markSectionEdited(sectionName) {
+
+    if (!pendingWebsiteData.editedSections) {
+
+        pendingWebsiteData.editedSections = [];
+
+    }
+
+
+    if (
+        !pendingWebsiteData.editedSections.includes(
+            sectionName
+        )
+    ) {
+
+        pendingWebsiteData.editedSections.push(
+            sectionName
+        );
+
+    }
+
+
+    pendingWebsiteData.editor = editorName;
+
+}
+
+
+
+/* =====================================================
    PREPARE SECTION
+   (fixed: this used to REPLACE pendingWebsiteData
+   entirely with "=", which silently deleted any
+   gallery/logo data prepared earlier. Now it merges.)
    ===================================================== */
 
 function prepareSection(sectionName) {
 
-    pendingWebsiteData =
+    const freshData =
         collectWebsiteData();
 
 
-    pendingWebsiteData.editedSection =
-        sectionName;
+    pendingWebsiteData =
+        Object.assign(
+            {},
+            pendingWebsiteData,
+            freshData
+        );
 
 
-    pendingWebsiteData.editor =
-        editorName;
+    markSectionEdited(sectionName);
 
 
     showStatus(
@@ -2118,74 +2215,19 @@ photoInput.addEventListener(
     "change",
     function(event) {
 
-        const preview =
-            document.getElementById(
-                "photoPreview"
+        selectedGalleryFiles =
+            Array.from(event.target.files).filter(
+                function(file) {
+
+                    return file.type.startsWith(
+                        "image/"
+                    );
+
+                }
             );
 
 
-        preview.innerHTML = "";
-
-
-        selectedGalleryFiles =
-            Array.from(event.target.files);
-
-
-        selectedGalleryFiles.forEach(
-            function(file, index) {
-
-                if (
-                    !file.type.startsWith("image/")
-                ) {
-
-                    return;
-
-                }
-
-
-                const reader =
-                    new FileReader();
-
-
-                reader.onload =
-                    function(e) {
-
-                        const item =
-                            document.createElement(
-                                "div"
-                            );
-
-
-                        item.className =
-                            "preview-item";
-
-
-                        item.innerHTML = `
-
-                            <img
-                                src="${e.target.result}"
-                                alt="Selected school photo"
-                            >
-
-                            <button
-                                type="button"
-                                onclick="removeGalleryPhoto(${index})">
-
-                                ×
-
-                            </button>
-
-                        `;
-
-
-                        preview.appendChild(item);
-
-                    };
-
-
-                reader.readAsDataURL(file);
-
-            });
+        renderGalleryPreview();
 
     }
 );
@@ -2303,12 +2345,7 @@ function prepareGallery() {
     };
 
 
-    pendingWebsiteData.editedSection =
-        "gallery";
-
-
-    pendingWebsiteData.editor =
-        editorName;
+    markSectionEdited("gallery");
 
 
     showStatus(
@@ -2426,17 +2463,47 @@ function prepareLogo() {
     };
 
 
-    pendingWebsiteData.editedSection =
-        "logo";
-
-
-    pendingWebsiteData.editor =
-        editorName;
+    markSectionEdited("logo");
 
 
     showStatus(
         "New logo prepared for publishing."
     );
+
+}
+
+
+
+/* =====================================================
+   PENDING SUMMARY (shown on the Publish screen)
+   ===================================================== */
+
+function updatePendingSummary() {
+
+    const summary =
+        document.getElementById(
+            "pendingSummary"
+        );
+
+
+    const sections =
+        pendingWebsiteData.editedSections || [];
+
+
+    if (sections.length === 0) {
+
+        summary.textContent =
+            "No changes prepared yet. Go back to the dashboard, edit a section, and click its Save button first.";
+
+        return;
+
+    }
+
+
+    summary.textContent =
+        "Ready to publish: " +
+        sections.join(", ") +
+        ".";
 
 }
 
@@ -2449,7 +2516,8 @@ function prepareLogo() {
 async function publishWebsite() {
 
     if (
-        Object.keys(pendingWebsiteData).length === 0
+        !pendingWebsiteData.editedSections ||
+        pendingWebsiteData.editedSections.length === 0
     ) {
 
         showStatus(
@@ -2542,6 +2610,9 @@ async function publishWebsite() {
 
 
         pendingWebsiteData = {};
+
+
+        updatePendingSummary();
 
 
     } catch (error) {
