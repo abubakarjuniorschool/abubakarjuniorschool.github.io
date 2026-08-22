@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Editor Dashboard | Abubakar Junior School</title>
 
     <style>
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -19,9 +21,9 @@
             color: #222;
         }
 
-        /* ==============================
+        /* =====================================================
            HEADER
-           ============================== */
+           ===================================================== */
 
         .dashboard-header {
             background: #0756a8;
@@ -33,6 +35,7 @@
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
         }
 
         .dashboard-header h1 {
@@ -43,6 +46,19 @@
         .dashboard-header span {
             font-size: 13px;
             opacity: 0.85;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .editor-badge {
+            background: rgba(255,255,255,0.15);
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 13px;
         }
 
         .logout-btn {
@@ -59,18 +75,18 @@
             background: #b00320;
         }
 
-        /* ==============================
+        /* =====================================================
            MAIN CONTAINER
-           ============================== */
+           ===================================================== */
 
         .dashboard-container {
             width: min(1100px, 94%);
             margin: 30px auto;
         }
 
-        /* ==============================
+        /* =====================================================
            WELCOME
-           ============================== */
+           ===================================================== */
 
         .welcome {
             background: white;
@@ -78,6 +94,7 @@
             border-radius: 14px;
             margin-bottom: 25px;
             box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+            border-left: 5px solid #0756a8;
         }
 
         .welcome h2 {
@@ -90,9 +107,9 @@
             line-height: 1.6;
         }
 
-        /* ==============================
-           EDITOR GRID
-           ============================== */
+        /* =====================================================
+           DASHBOARD GRID
+           ===================================================== */
 
         .editor-grid {
             display: grid;
@@ -113,6 +130,7 @@
         .editor-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            border-color: #0756a8;
         }
 
         .editor-icon {
@@ -131,9 +149,9 @@
             line-height: 1.5;
         }
 
-        /* ==============================
+        /* =====================================================
            EDIT SECTIONS
-           ============================== */
+           ===================================================== */
 
         .edit-section {
             display: none;
@@ -153,6 +171,32 @@
             margin-bottom: 20px;
         }
 
+        .section-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+
+        .back-btn {
+            background: #eef3f8;
+            color: #0756a8;
+            border: none;
+            padding: 9px 14px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .back-btn:hover {
+            background: #dce8f3;
+        }
+
+        /* =====================================================
+           FORM FIELDS
+           ===================================================== */
+
         .field {
             margin-bottom: 18px;
         }
@@ -161,6 +205,7 @@
             display: block;
             font-weight: bold;
             margin-bottom: 7px;
+            color: #333;
         }
 
         .field input,
@@ -172,12 +217,15 @@
             border-radius: 8px;
             font-size: 15px;
             font-family: inherit;
+            background: white;
         }
 
         .field input:focus,
-        .field textarea:focus {
+        .field textarea:focus,
+        .field select:focus {
             outline: none;
             border-color: #0756a8;
+            box-shadow: 0 0 0 2px rgba(7,86,168,0.08);
         }
 
         .field textarea {
@@ -185,9 +233,16 @@
             resize: vertical;
         }
 
-        /* ==============================
+        /* =====================================================
            BUTTONS
-           ============================== */
+           ===================================================== */
+
+        .button-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
 
         .save-btn {
             background: #0756a8;
@@ -203,6 +258,20 @@
             background: #06437f;
         }
 
+        .publish-btn {
+            background: #16803c;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .publish-btn:hover {
+            background: #10632d;
+        }
+
         .cancel-btn {
             background: #777;
             color: white;
@@ -210,12 +279,15 @@
             padding: 12px 20px;
             border-radius: 8px;
             cursor: pointer;
-            margin-left: 8px;
         }
 
-        /* ==============================
+        .cancel-btn:hover {
+            background: #555;
+        }
+
+        /* =====================================================
            PHOTO UPLOAD
-           ============================== */
+           ===================================================== */
 
         .photo-upload {
             border: 2px dashed #bbb;
@@ -223,6 +295,16 @@
             text-align: center;
             border-radius: 12px;
             margin-bottom: 20px;
+            background: #fafafa;
+        }
+
+        .photo-upload h3 {
+            color: #0756a8;
+        }
+
+        .photo-upload p {
+            margin-top: 8px;
+            color: #777;
         }
 
         .photo-upload input {
@@ -246,6 +328,7 @@
             height: 130px;
             object-fit: cover;
             border-radius: 9px;
+            display: block;
         }
 
         .preview-item button {
@@ -262,9 +345,9 @@
             font-size: 18px;
         }
 
-        /* ==============================
-           LOGO PREVIEW
-           ============================== */
+        /* =====================================================
+           LOGO
+           ===================================================== */
 
         .logo-current {
             text-align: center;
@@ -296,9 +379,69 @@
             background: white;
         }
 
-        /* ==============================
+        /* =====================================================
+           P1-P7
+           ===================================================== */
+
+        .class-editor {
+            border: 1px solid #e1e5ea;
+            padding: 18px;
+            border-radius: 10px;
+            margin-bottom: 18px;
+            background: #fafcff;
+        }
+
+        .class-editor h3 {
+            color: #0756a8;
+            margin-bottom: 12px;
+        }
+
+        /* =====================================================
+           PUBLISHING NOTICE
+           ===================================================== */
+
+        .publishing-notice {
+            background: #fff8e6;
+            border: 1px solid #f0d48a;
+            padding: 18px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .publishing-notice strong {
+            color: #8a5a00;
+        }
+
+        /* =====================================================
+           STATUS
+           ===================================================== */
+
+        #statusMessage {
+            display: none;
+            margin-top: 20px;
+            padding: 13px 16px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        #statusMessage.success {
+            display: block;
+            background: #e8f7ed;
+            color: #176b35;
+            border: 1px solid #bde5c8;
+        }
+
+        #statusMessage.error {
+            display: block;
+            background: #fdecec;
+            color: #a51c30;
+            border: 1px solid #f2c0c7;
+        }
+
+        /* =====================================================
            FOOTER
-           ============================== */
+           ===================================================== */
 
         .dashboard-footer {
             text-align: center;
@@ -307,9 +450,9 @@
             font-size: 13px;
         }
 
-        /* ==============================
+        /* =====================================================
            MOBILE
-           ============================== */
+           ===================================================== */
 
         @media (max-width: 600px) {
 
@@ -323,6 +466,10 @@
 
             .dashboard-header span {
                 font-size: 12px;
+            }
+
+            .editor-badge {
+                display: none;
             }
 
             .logout-btn {
@@ -341,1055 +488,1745 @@
             .photo-upload {
                 padding: 25px 15px;
             }
+
+            .section-top {
+                align-items: flex-start;
+                flex-direction: column;
+            }
         }
+
     </style>
+
 </head>
+
 
 <body>
 
-    <!-- ==============================
-         HEADER
-         ============================== -->
 
-    <header class="dashboard-header">
+<!-- =====================================================
+     HEADER
+     ===================================================== -->
 
-        <div>
-            <h1>Abubakar Junior School</h1>
-            <span>Editor Dashboard</span>
+<header class="dashboard-header">
+
+    <div>
+
+        <h1>
+            Abubakar Junior School
+        </h1>
+
+        <span>
+            Editor Dashboard
+        </span>
+
+    </div>
+
+
+    <div class="header-right">
+
+        <div class="editor-badge">
+            👤 <span id="loggedEditor">Editor</span>
         </div>
 
-        <button class="logout-btn" onclick="logout()">
+        <button
+            class="logout-btn"
+            type="button"
+            onclick="logout()">
+
             Logout
+
         </button>
 
-    </header>
+    </div>
+
+</header>
 
 
-    <!-- ==============================
-         MAIN
-         ============================== -->
 
-    <main class="dashboard-container">
+<!-- =====================================================
+     MAIN
+     ===================================================== -->
 
-        <!-- WELCOME -->
+<main class="dashboard-container">
 
-        <div class="welcome">
 
-            <h2>Welcome, Editor 👋</h2>
+    <!-- =================================================
+         WELCOME
+         ================================================= -->
+
+    <div class="welcome">
+
+        <h2>
+            Welcome, <span id="welcomeEditor">Editor</span> 👋
+        </h2>
+
+        <p>
+            From here you can update the Abubakar Junior
+            School website. Choose a section below to begin.
+            Your changes are prepared for publishing and are
+            not stored in your browser.
+        </p>
+
+    </div>
+
+
+
+    <!-- =================================================
+         EDITOR CARDS
+         ================================================= -->
+
+    <div
+        class="editor-grid"
+        id="editorGrid">
+
+
+        <!-- HOMEPAGE -->
+
+        <div
+            class="editor-card"
+            onclick="openSection('homepage')">
+
+            <div class="editor-icon">
+                🏠
+            </div>
+
+            <h3>
+                Homepage
+            </h3>
 
             <p>
-                From here you can update the school website.
-                Choose a section below to begin.
+                Edit the main welcome message, heading
+                and school introduction.
             </p>
 
         </div>
 
 
-        <!-- ==============================
-             EDITOR CARDS
-             ============================== -->
 
-        <div class="editor-grid">
+        <!-- ANNOUNCEMENTS -->
 
-            <!-- HOMEPAGE -->
+        <div
+            class="editor-card"
+            onclick="openSection('ticker')">
 
-            <div class="editor-card" onclick="openSection('homepage')">
-
-                <div class="editor-icon">🏠</div>
-
-                <h3>Homepage</h3>
-
-                <p>
-                    Edit the main welcome message, heading and school introduction.
-                </p>
-
+            <div class="editor-icon">
+                📢
             </div>
 
+            <h3>
+                Announcements
+            </h3>
 
-            <!-- ANNOUNCEMENTS -->
+            <p>
+                Add or change the scrolling ticker
+                announcements.
+            </p>
 
-            <div class="editor-card" onclick="openSection('ticker')">
+        </div>
 
-                <div class="editor-icon">📢</div>
 
-                <h3>Announcements</h3>
 
-                <p>
-                    Add or change the scrolling ticker announcements.
-                </p>
+        <!-- ABOUT -->
 
+        <div
+            class="editor-card"
+            onclick="openSection('about')">
+
+            <div class="editor-icon">
+                📝
             </div>
 
+            <h3>
+                About School
+            </h3>
 
-            <!-- ABOUT -->
+            <p>
+                Update the school's description
+                and information.
+            </p>
 
-            <div class="editor-card" onclick="openSection('about')">
+        </div>
 
-                <div class="editor-icon">📝</div>
 
-                <h3>About School</h3>
 
-                <p>
-                    Update the school's description and information.
-                </p>
+        <!-- ACADEMICS -->
 
+        <div
+            class="editor-card"
+            onclick="openSection('academics')">
+
+            <div class="editor-icon">
+                📚
             </div>
 
+            <h3>
+                Academics
+            </h3>
 
-            <!-- ACADEMICS -->
+            <p>
+                Update academic information
+                and programmes.
+            </p>
 
-            <div class="editor-card" onclick="openSection('academics')">
+        </div>
 
-                <div class="editor-icon">📚</div>
 
-                <h3>Academics</h3>
 
-                <p>
-                    Update academic information and programmes.
-                </p>
+        <!-- CLASSES -->
 
+        <div
+            class="editor-card"
+            onclick="openSection('classes')">
+
+            <div class="editor-icon">
+                🎓
             </div>
 
+            <h3>
+                Classes
+            </h3>
 
-            <!-- CLASSES -->
+            <p>
+                Edit P1 to P7 class information.
+            </p>
 
-            <div class="editor-card" onclick="openSection('classes')">
+        </div>
 
-                <div class="editor-icon">🎓</div>
 
-                <h3>Classes</h3>
 
-                <p>
-                    Edit P1 to P7 class information.
-                </p>
+        <!-- NEWS -->
 
+        <div
+            class="editor-card"
+            onclick="openSection('news')">
+
+            <div class="editor-icon">
+                📰
             </div>
 
+            <h3>
+                School News
+            </h3>
 
-            <!-- NEWS -->
+            <p>
+                Add or edit school news
+                and announcements.
+            </p>
 
-            <div class="editor-card" onclick="openSection('news')">
+        </div>
 
-                <div class="editor-icon">📰</div>
 
-                <h3>School News</h3>
 
-                <p>
-                    Add or edit school news and announcements.
-                </p>
+        <!-- GALLERY -->
 
+        <div
+            class="editor-card"
+            onclick="openSection('gallery')">
+
+            <div class="editor-icon">
+                🖼️
             </div>
 
+            <h3>
+                Gallery
+            </h3>
 
-            <!-- GALLERY -->
+            <p>
+                Select photos from your device
+                and manage school photos.
+            </p>
 
-            <div class="editor-card" onclick="openSection('gallery')">
+        </div>
 
-                <div class="editor-icon">🖼️</div>
 
-                <h3>Gallery</h3>
 
-                <p>
-                    Select photos from your device and manage school photos.
-                </p>
+        <!-- CONTACT -->
 
+        <div
+            class="editor-card"
+            onclick="openSection('contact')">
+
+            <div class="editor-icon">
+                📞
             </div>
 
+            <h3>
+                Contact
+            </h3>
 
-            <!-- CONTACT -->
+            <p>
+                Update phone numbers, email
+                and school address.
+            </p>
 
-            <div class="editor-card" onclick="openSection('contact')">
+        </div>
 
-                <div class="editor-icon">📞</div>
 
-                <h3>Contact</h3>
 
-                <p>
-                    Update phone numbers, email and school address.
-                </p>
+        <!-- LOGO -->
 
+        <div
+            class="editor-card"
+            onclick="openSection('logo')">
+
+            <div class="editor-icon">
+                🏫
             </div>
 
+            <h3>
+                School Logo
+            </h3>
 
-            <!-- SCHOOL LOGO -->
+            <p>
+                Change the school logo displayed
+                across the website.
+            </p>
 
-            <div class="editor-card" onclick="openSection('logo')">
+        </div>
 
-                <div class="editor-icon">🏫</div>
 
-                <h3>School Logo</h3>
+    </div>
 
-                <p>
-                    Change the school logo displayed across the website.
-                </p>
+
+
+    <!-- =================================================
+         HOMEPAGE
+         ================================================= -->
+
+    <section
+        class="edit-section"
+        id="homepage">
+
+        <div class="section-top">
+
+            <h2>
+                🏠 Edit Homepage
+            </h2>
+
+            <button
+                class="back-btn"
+                type="button"
+                onclick="closeSections()">
+
+                ← Dashboard
+
+            </button>
+
+        </div>
+
+
+        <div class="field">
+
+            <label for="heroWelcome">
+                Welcome Text
+            </label>
+
+            <input
+                type="text"
+                id="heroWelcome"
+                value="WELCOME TO ABUBAKAR JUNIOR SCHOOL">
+
+        </div>
+
+
+        <div class="field">
+
+            <label for="heroHeading">
+                Main Heading
+            </label>
+
+            <input
+                type="text"
+                id="heroHeading"
+                value="Building Bright Minds For A Better Future">
+
+        </div>
+
+
+        <div class="field">
+
+            <label for="heroDescription">
+                Homepage Description
+            </label>
+
+            <textarea
+                id="heroDescription">We provide quality education in a safe, disciplined and supportive environment where every child can discover their potential.</textarea>
+
+        </div>
+
+
+        <div class="button-row">
+
+            <button
+                class="save-btn"
+                type="button"
+                onclick="prepareSection('homepage')">
+
+                💾 SAVE HOMEPAGE
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         TICKER
+         ================================================= -->
+
+    <section
+        class="edit-section"
+        id="ticker">
+
+        <div class="section-top">
+
+            <h2>
+                📢 Edit Announcements
+            </h2>
+
+            <button
+                class="back-btn"
+                type="button"
+                onclick="closeSections()">
+
+                ← Dashboard
+
+            </button>
+
+        </div>
+
+
+        <div class="field">
+
+            <label for="ticker1">
+                Announcement 1
+            </label>
+
+            <input
+                type="text"
+                id="ticker1"
+                value="Term 3 begins on 8th September 2026 — prepare your child early!">
+
+        </div>
+
+
+        <div class="field">
+
+            <label for="ticker2">
+                Announcement 2
+            </label>
+
+            <input
+                type="text"
+                id="ticker2"
+                value="Admissions for the new intake are now open — contact us today!">
+
+        </div>
+
+
+        <div class="field">
+
+            <label for="ticker3">
+                Announcement 3
+            </label>
+
+            <input
+                type="text"
+                id="ticker3"
+                value="Congratulations to our P7 candidates on their excellent results!">
+
+        </div>
+
+
+        <div class="field">
+
+            <label for="ticker4">
+                Announcement 4
+            </label>
+
+            <input
+                type="text"
+                id="ticker4"
+                value="📍 Visit our school — Uganda.">
+
+        </div>
+
+
+        <div class="button-row">
+
+            <button
+                class="save-btn"
+                type="button"
+                onclick="prepareSection('ticker')">
+
+                💾 SAVE ANNOUNCEMENTS
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         ABOUT
+         ================================================= -->
+
+    <section
+        class="edit-section"
+        id="about">
+
+        <div class="section-top">
+
+            <h2>
+                📝 Edit About School
+            </h2>
+
+            <button
+                class="back-btn"
+                type="button"
+                onclick="closeSections()">
+
+                ← Dashboard
+
+            </button>
+
+        </div>
+
+
+        <div class="field">
+
+            <label for="aboutHeading">
+                About Heading
+            </label>
+
+            <input
+                type="text"
+                id="aboutHeading"
+                value="Where Every Child Is Given A Chance To Shine">
+
+        </div>
+
+
+        <div class="field">
+
+            <label for="aboutParagraph1">
+                First Paragraph
+            </label>
+
+            <textarea
+                id="aboutParagraph1">Abubakar Junior School is committed to providing quality education that develops the academic, social, moral and practical abilities of every learner.</textarea>
+
+        </div>
+
+
+        <div class="field">
+
+            <label for="aboutParagraph2">
+                Second Paragraph
+            </label>
+
+            <textarea
+                id="aboutParagraph2">We believe that education is more than classroom learning. Our goal is to nurture disciplined, confident and responsible children prepared for the future.</textarea>
+
+        </div>
+
+
+        <div class="button-row">
+
+            <button
+                class="save-btn"
+                type="button"
+                onclick="prepareSection('about')">
+
+                💾 SAVE ABOUT
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         ACADEMICS
+         ================================================= -->
+
+    <section
+        class="edit-section"
+        id="academics">
+
+        <div class="section-top">
+
+            <h2>
+                📚 Edit Academics
+            </h2>
+
+            <button
+                class="back-btn"
+                type="button"
+                onclick="closeSections()">
+
+                ← Dashboard
+
+            </button>
+
+        </div>
+
+
+        <div class="field">
+
+            <label for="academicHeading">
+                Academic Heading
+            </label>
+
+            <input
+                type="text"
+                id="academicHeading"
+                value="Education With Purpose">
+
+        </div>
+
+
+        <div class="field">
+
+            <label for="academicDescription">
+                Academic Description
+            </label>
+
+            <textarea
+                id="academicDescription">Our learning programme focuses on academic achievement, creativity, discipline and practical skills.</textarea>
+
+        </div>
+
+
+        <div class="button-row">
+
+            <button
+                class="save-btn"
+                type="button"
+                onclick="prepareSection('academics')">
+
+                💾 SAVE ACADEMICS
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         CLASSES
+         ================================================= -->
+
+    <section
+        class="edit-section"
+        id="classes">
+
+        <div class="section-top">
+
+            <h2>
+                🎓 Edit Classes P1–P7
+            </h2>
+
+            <button
+                class="back-btn"
+                type="button"
+                onclick="closeSections()">
+
+                ← Dashboard
+
+            </button>
+
+        </div>
+
+
+        <!-- P1 -->
+
+        <div class="class-editor">
+
+            <h3>
+                P1
+            </h3>
+
+            <div class="field">
+
+                <label for="p1Description">
+                    P1 Description
+                </label>
+
+                <input
+                    type="text"
+                    id="p1Description"
+                    value="Building strong foundations for learning.">
 
             </div>
 
         </div>
 
 
-        <!-- ==============================
-             HOMEPAGE
-             ============================== -->
 
-        <section class="edit-section" id="homepage">
+        <!-- P2 -->
 
-            <h2>🏠 Edit Homepage</h2>
+        <div class="class-editor">
+
+            <h3>
+                P2
+            </h3>
 
             <div class="field">
 
-                <label>Welcome Text</label>
+                <label for="p2Description">
+                    P2 Description
+                </label>
 
                 <input
                     type="text"
-                    value="WELCOME TO ABUBAKAR JUNIOR SCHOOL"
-                >
+                    id="p2Description"
+                    value="Developing confidence and essential skills.">
 
             </div>
 
+        </div>
+
+
+
+        <!-- P3 -->
+
+        <div class="class-editor">
+
+            <h3>
+                P3
+            </h3>
 
             <div class="field">
 
-                <label>Main Heading</label>
+                <label for="p3Description">
+                    P3 Description
+                </label>
 
                 <input
                     type="text"
-                    value="Building Bright Minds For A Better Future"
-                >
+                    id="p3Description"
+                    value="Strengthening knowledge and understanding.">
 
             </div>
 
+        </div>
+
+
+
+        <!-- P4 -->
+
+        <div class="class-editor">
+
+            <h3>
+                P4
+            </h3>
 
             <div class="field">
 
-                <label>Homepage Description</label>
-
-                <textarea>We provide quality education in a safe, disciplined and supportive environment where every child can discover their potential.</textarea>
-
-            </div>
-
-
-            <button class="save-btn" onclick="saveChanges()">
-                SAVE CHANGES
-            </button>
-
-        </section>
-
-
-        <!-- ==============================
-             TICKER
-             ============================== -->
-
-        <section class="edit-section" id="ticker">
-
-            <h2>📢 Edit Announcements</h2>
-
-            <div class="field">
-
-                <label>Announcement 1</label>
+                <label for="p4Description">
+                    P4 Description
+                </label>
 
                 <input
                     type="text"
-                    value="Term 3 begins on 8th September 2026 — prepare your child early!"
-                >
+                    id="p4Description"
+                    value="Encouraging independent learning.">
 
             </div>
 
+        </div>
+
+
+
+        <!-- P5 -->
+
+        <div class="class-editor">
+
+            <h3>
+                P5
+            </h3>
 
             <div class="field">
 
-                <label>Announcement 2</label>
+                <label for="p5Description">
+                    P5 Description
+                </label>
 
                 <input
                     type="text"
-                    value="Admissions for the new intake are now open — contact us today!"
-                >
+                    id="p5Description"
+                    value="Preparing learners for greater challenges.">
 
             </div>
 
+        </div>
+
+
+
+        <!-- P6 -->
+
+        <div class="class-editor">
+
+            <h3>
+                P6
+            </h3>
 
             <div class="field">
 
-                <label>Announcement 3</label>
+                <label for="p6Description">
+                    P6 Description
+                </label>
 
                 <input
                     type="text"
-                    value="Congratulations to our P7 candidates on their excellent results!"
-                >
+                    id="p6Description"
+                    value="Preparing learners for upper primary.">
 
             </div>
 
+        </div>
+
+
+
+        <!-- P7 -->
+
+        <div class="class-editor">
+
+            <h3>
+                P7
+            </h3>
 
             <div class="field">
 
-                <label>Announcement 4</label>
+                <label for="p7Description">
+                    P7 Description
+                </label>
 
                 <input
                     type="text"
-                    value="📍 Visit our school — Uganda."
-                >
+                    id="p7Description"
+                    value="Preparing learners for their next level.">
 
             </div>
 
+        </div>
 
-            <button class="save-btn" onclick="saveChanges()">
-                SAVE ANNOUNCEMENTS
-            </button>
 
-        </section>
-
-
-        <!-- ==============================
-             ABOUT
-             ============================== -->
-
-        <section class="edit-section" id="about">
-
-            <h2>📝 Edit About School</h2>
-
-            <div class="field">
-
-                <label>About Heading</label>
-
-                <input
-                    type="text"
-                    value="Where Every Child Is Given A Chance To Shine"
-                >
-
-            </div>
-
-
-            <div class="field">
-
-                <label>First Paragraph</label>
-
-                <textarea>Abubakar Junior School is committed to providing quality education that develops the academic, social, moral and practical abilities of every learner.</textarea>
-
-            </div>
-
-
-            <div class="field">
-
-                <label>Second Paragraph</label>
-
-                <textarea>We believe that education is more than classroom learning. Our goal is to nurture disciplined, confident and responsible children prepared for the future.</textarea>
-
-            </div>
-
-
-            <button class="save-btn" onclick="saveChanges()">
-                SAVE ABOUT
-            </button>
-
-        </section>
-
-
-        <!-- ==============================
-             ACADEMICS
-             ============================== -->
-
-        <section class="edit-section" id="academics">
-
-            <h2>📚 Edit Academics</h2>
-
-            <div class="field">
-
-                <label>Academic Heading</label>
-
-                <input
-                    type="text"
-                    value="Education With Purpose"
-                >
-
-            </div>
-
-
-            <div class="field">
-
-                <label>Academic Description</label>
-
-                <textarea>Our learning programme focuses on academic achievement, creativity, discipline and practical skills.</textarea>
-
-            </div>
-
-
-            <button class="save-btn" onclick="saveChanges()">
-                SAVE ACADEMICS
-            </button>
-
-        </section>
-
-
-        <!-- ==============================
-             CLASSES
-             ============================== -->
-
-        <section class="edit-section" id="classes">
-
-            <h2>🎓 Edit Classes</h2>
-
-            <div class="field">
-                <label>P1 Description</label>
-
-                <input
-                    type="text"
-                    value="Building strong foundations for learning."
-                >
-            </div>
-
-
-            <div class="field">
-                <label>P2 Description</label>
-
-                <input
-                    type="text"
-                    value="Developing confidence and essential skills."
-                >
-            </div>
-
-
-            <div class="field">
-                <label>P3 Description</label>
-
-                <input
-                    type="text"
-                    value="Strengthening knowledge and understanding."
-                >
-            </div>
-
-
-            <div class="field">
-                <label>P4 Description</label>
-
-                <input
-                    type="text"
-                    value="Encouraging independent learning."
-                >
-            </div>
-
-
-            <div class="field">
-                <label>P5 Description</label>
-
-                <input
-                    type="text"
-                    value="Preparing learners for greater challenges."
-                >
-            </div>
-
-
-            <div class="field">
-                <label>P6 Description</label>
-
-                <input
-                    type="text"
-                    value="Preparing learners for upper primary."
-                >
-            </div>
-
-
-            <div class="field">
-                <label>P7 Description</label>
-
-                <input
-                    type="text"
-                    value="Preparing learners for their next level."
-                >
-            </div>
-
-
-            <button class="save-btn" onclick="saveChanges()">
-                SAVE CLASSES
-            </button>
-
-        </section>
-
-
-        <!-- ==============================
-             NEWS
-             ============================== -->
-
-        <section class="edit-section" id="news">
-
-            <h2>📰 Edit School News</h2>
-
-            <div class="field">
-
-                <label>News Title</label>
-
-                <input
-                    type="text"
-                    value="Welcome to Abubakar Junior School"
-                >
-
-            </div>
-
-
-            <div class="field">
-
-                <label>News Description</label>
-
-                <textarea>Follow this page for school announcements, activities and important updates.</textarea>
-
-            </div>
-
-
-            <button class="save-btn" onclick="saveChanges()">
-                SAVE NEWS
-            </button>
-
-        </section>
-
-
-        <!-- ==============================
-             GALLERY
-             ============================== -->
-
-        <section class="edit-section" id="gallery">
-
-            <h2>🖼️ School Gallery</h2>
-
-            <div class="photo-upload">
-
-                <h3>Select Photos From Your Device</h3>
-
-                <p style="margin-top:8px; color:#777;">
-                    You can select one or several photos.
-                </p>
-
-                <input
-                    type="file"
-                    id="photoInput"
-                    accept="image/*"
-                    multiple
-                >
-
-            </div>
-
-
-            <div id="photoPreview"></div>
-
-
-            <button class="save-btn" onclick="saveChanges()">
-                SAVE PHOTOS
-            </button>
-
-        </section>
-
-
-        <!-- ==============================
-             CONTACT
-             ============================== -->
-
-        <section class="edit-section" id="contact">
-
-            <h2>📞 Edit Contact Information</h2>
-
-            <div class="field">
-
-                <label>Phone Number</label>
-
-                <input
-                    type="text"
-                    value="+256 707 221 378"
-                >
-
-            </div>
-
-
-            <div class="field">
-
-                <label>Email Address</label>
-
-                <input
-                    type="email"
-                    value="abubakarjuniorschool123@gmail.com"
-                >
-
-            </div>
-
-
-            <div class="field">
-
-                <label>Address</label>
-
-                <textarea>Abubakar Junior School, Uganda</textarea>
-
-            </div>
-
-
-            <div class="field">
-
-                <label>WhatsApp Number</label>
-
-                <input
-                    type="text"
-                    value="+256 707 221 378"
-                >
-
-            </div>
-
-
-            <button class="save-btn" onclick="saveChanges()">
-                SAVE CONTACT
-            </button>
-
-        </section>
-
-
-        <!-- ==============================
-             SCHOOL LOGO
-             ============================== -->
-
-        <section class="edit-section" id="logo">
-
-            <h2>🏫 Change School Logo</h2>
-
-
-            <div class="logo-current">
-
-                <p style="margin-bottom:12px; color:#777;">
-                    Current Logo
-                </p>
-
-                <img
-                    id="currentLogoPreview"
-                    src="1771662963236.png"
-                    alt="Current School Logo"
-                >
-
-            </div>
-
-
-            <div class="photo-upload">
-
-                <h3>Choose New Logo</h3>
-
-                <p style="margin-top:8px; color:#777;">
-                    Select a logo from your phone or computer.
-                </p>
-
-                <input
-                    type="file"
-                    id="logoInput"
-                    accept="image/*"
-                >
-
-            </div>
-
-
-            <div id="logoPreview"></div>
-
+        <div class="button-row">
 
             <button
                 class="save-btn"
-                onclick="saveLogo()"
-            >
-                SAVE LOGO
+                type="button"
+                onclick="prepareSection('classes')">
+
+                💾 SAVE CLASSES
+
             </button>
 
-        </section>
+        </div>
 
-    </main>
-
-
-    <!-- ==============================
-         FOOTER
-         ============================== -->
-
-    <footer class="dashboard-footer">
-
-        Abubakar Junior School — Editor Dashboard
-
-    </footer>
+    </section>
 
 
-    <!-- ==============================
-         JAVASCRIPT
-         ============================== -->
 
-    <script>
+    <!-- =================================================
+         NEWS
+         ================================================= -->
 
-        /* ==========================
-           CHECK LOGIN
-           ========================== */
+    <section
+        class="edit-section"
+        id="news">
 
-        if (
-            sessionStorage.getItem("editorLoggedIn") !== "true"
-        ) {
+        <div class="section-top">
 
-            window.location.href = "editor-login.html";
+            <h2>
+                📰 Edit School News
+            </h2>
+
+            <button
+                class="back-btn"
+                type="button"
+                onclick="closeSections()">
+
+                ← Dashboard
+
+            </button>
+
+        </div>
+
+
+        <div class="field">
+
+            <label for="newsTitle">
+                News Title
+            </label>
+
+            <input
+                type="text"
+                id="newsTitle"
+                value="Welcome to Abubakar Junior School">
+
+        </div>
+
+
+        <div class="field">
+
+            <label for="newsDescription">
+                News Description
+            </label>
+
+            <textarea
+                id="newsDescription">Follow this page for school announcements, activities and important updates.</textarea>
+
+        </div>
+
+
+        <div class="button-row">
+
+            <button
+                class="save-btn"
+                type="button"
+                onclick="prepareSection('news')">
+
+                💾 SAVE NEWS
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         GALLERY
+         ================================================= -->
+
+    <section
+        class="edit-section"
+        id="gallery">
+
+        <div class="section-top">
+
+            <h2>
+                🖼️ School Gallery
+            </h2>
+
+            <button
+                class="back-btn"
+                type="button"
+                onclick="closeSections()">
+
+                ← Dashboard
+
+            </button>
+
+        </div>
+
+
+        <div class="photo-upload">
+
+            <h3>
+                Select Photos From Your Device
+            </h3>
+
+            <p>
+                You can select one or several photos.
+                These photos will be prepared for
+                secure publishing.
+            </p>
+
+            <input
+                type="file"
+                id="photoInput"
+                accept="image/*"
+                multiple>
+
+        </div>
+
+
+        <div id="photoPreview"></div>
+
+
+        <div class="button-row">
+
+            <button
+                class="save-btn"
+                type="button"
+                onclick="prepareGallery()">
+
+                💾 SAVE PHOTOS
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         CONTACT
+         ================================================= -->
+
+    <section
+        class="edit-section"
+        id="contact">
+
+        <div class="section-top">
+
+            <h2>
+                📞 Edit Contact Information
+            </h2>
+
+            <button
+                class="back-btn"
+                type="button"
+                onclick="closeSections()">
+
+                ← Dashboard
+
+            </button>
+
+        </div>
+
+
+        <div class="field">
+
+            <label for="contactPhone">
+                Phone Number
+            </label>
+
+            <input
+                type="text"
+                id="contactPhone"
+                value="+256 707 221 378">
+
+        </div>
+
+
+        <div class="field">
+
+            <label for="contactEmail">
+                Email Address
+            </label>
+
+            <input
+                type="email"
+                id="contactEmail"
+                value="abubakarjuniorschool123@gmail.com">
+
+        </div>
+
+
+        <div class="field">
+
+            <label for="contactAddress">
+                Address
+            </label>
+
+            <textarea
+                id="contactAddress">Abubakar Junior School, Uganda</textarea>
+
+        </div>
+
+
+        <div class="field">
+
+            <label for="contactWhatsapp">
+                WhatsApp Number
+            </label>
+
+            <input
+                type="text"
+                id="contactWhatsapp"
+                value="+256 707 221 378">
+
+        </div>
+
+
+        <div class="button-row">
+
+            <button
+                class="save-btn"
+                type="button"
+                onclick="prepareSection('contact')">
+
+                💾 SAVE CONTACT
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         SCHOOL LOGO
+         ================================================= -->
+
+    <section
+        class="edit-section"
+        id="logo">
+
+        <div class="section-top">
+
+            <h2>
+                🏫 Change School Logo
+            </h2>
+
+            <button
+                class="back-btn"
+                type="button"
+                onclick="closeSections()">
+
+                ← Dashboard
+
+            </button>
+
+        </div>
+
+
+        <div class="logo-current">
+
+            <p
+                style="
+                    margin-bottom:12px;
+                    color:#777;
+                ">
+
+                Current Logo
+
+            </p>
+
+
+            <img
+                id="currentLogoPreview"
+                src="1771662963236.png"
+                alt="Current School Logo">
+
+        </div>
+
+
+        <div class="photo-upload">
+
+            <h3>
+                Choose New Logo
+            </h3>
+
+            <p>
+                Select a logo from your phone
+                or computer.
+            </p>
+
+            <input
+                type="file"
+                id="logoInput"
+                accept="image/*">
+
+        </div>
+
+
+        <div id="logoPreview"></div>
+
+
+        <div class="button-row">
+
+            <button
+                class="save-btn"
+                type="button"
+                onclick="prepareLogo()">
+
+                💾 SAVE LOGO
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         PUBLISHING
+         ================================================= -->
+
+    <section
+        class="edit-section"
+        id="publishing">
+
+        <div class="section-top">
+
+            <h2>
+                🚀 Publish Changes
+            </h2>
+
+            <button
+                class="back-btn"
+                type="button"
+                onclick="closeSections()">
+
+                ← Dashboard
+
+            </button>
+
+        </div>
+
+
+        <div class="publishing-notice">
+
+            <strong>
+                Secure Publishing
+            </strong>
+
+            <br>
+
+            Your changes are NOT stored in
+            localStorage and no GitHub token is
+            placed inside this public HTML file.
+
+            <br><br>
+
+            The final publishing system will send
+            approved changes to a secure publishing
+            service, which will update the GitHub
+            repository.
+
+        </div>
+
+
+        <div class="button-row">
+
+            <button
+                class="publish-btn"
+                type="button"
+                onclick="publishWebsite()">
+
+                🚀 PUBLISH WEBSITE
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         STATUS
+         ================================================= -->
+
+    <div id="statusMessage"></div>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+     ===================================================== -->
+
+<footer class="dashboard-footer">
+
+    Abubakar Junior School — Editor Dashboard
+
+</footer>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+     ===================================================== -->
+
+<script>
+
+
+/* =====================================================
+   LOGIN PROTECTION
+   ===================================================== */
+
+if (
+    sessionStorage.getItem("editorLoggedIn") !== "true"
+) {
+
+    window.location.href = "editor-login.html";
+
+}
+
+
+/* =====================================================
+   EDITOR NAME
+   ===================================================== */
+
+const editorName =
+    sessionStorage.getItem("editorName") || "Editor";
+
+
+document.getElementById(
+    "loggedEditor"
+).textContent = editorName;
+
+
+document.getElementById(
+    "welcomeEditor"
+).textContent = editorName;
+
+
+
+/* =====================================================
+   TEMPORARY DATA
+   ===================================================== */
+
+/*
+    IMPORTANT:
+
+    There is NO localStorage in this system.
+
+    Changes are kept only in JavaScript memory
+    until we connect the secure publishing API.
+
+    If the page is refreshed before publishing,
+    unsent changes will disappear.
+*/
+
+let pendingWebsiteData = {};
+
+let selectedGalleryFiles = [];
+
+let selectedLogoFile = null;
+
+
+
+/* =====================================================
+   OPEN SECTION
+   ===================================================== */
+
+function openSection(sectionId) {
+
+    document
+        .querySelectorAll(".edit-section")
+        .forEach(function(section) {
+
+            section.classList.remove("active");
+
+        });
+
+
+    document.getElementById(
+        "editorGrid"
+    ).style.display = "none";
+
+
+    const selected =
+        document.getElementById(sectionId);
+
+
+    if (selected) {
+
+        selected.classList.add("active");
+
+        selected.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+    }
+
+}
+
+
+
+/* =====================================================
+   CLOSE SECTIONS
+   ===================================================== */
+
+function closeSections() {
+
+    document
+        .querySelectorAll(".edit-section")
+        .forEach(function(section) {
+
+            section.classList.remove("active");
+
+        });
+
+
+    document.getElementById(
+        "editorGrid"
+    ).style.display = "grid";
+
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+
+/* =====================================================
+   STATUS MESSAGE
+   ===================================================== */
+
+function showStatus(message, type = "success") {
+
+    const status =
+        document.getElementById("statusMessage");
+
+
+    status.textContent = message;
+
+
+    status.className = type;
+
+
+    status.style.display = "block";
+
+
+    setTimeout(function() {
+
+        status.style.display = "none";
+
+    }, 4000);
+
+}
+
+
+
+/* =====================================================
+   COLLECT ALL WEBSITE DATA
+   ===================================================== */
+
+function collectWebsiteData() {
+
+    return {
+
+        homepage: {
+
+            welcome:
+                document.getElementById(
+                    "heroWelcome"
+                ).value,
+
+            heading:
+                document.getElementById(
+                    "heroHeading"
+                ).value,
+
+            description:
+                document.getElementById(
+                    "heroDescription"
+                ).value
+
+        },
+
+
+        ticker: {
+
+            ticker1:
+                document.getElementById(
+                    "ticker1"
+                ).value,
+
+            ticker2:
+                document.getElementById(
+                    "ticker2"
+                ).value,
+
+            ticker3:
+                document.getElementById(
+                    "ticker3"
+                ).value,
+
+            ticker4:
+                document.getElementById(
+                    "ticker4"
+                ).value
+
+        },
+
+
+        about: {
+
+            heading:
+                document.getElementById(
+                    "aboutHeading"
+                ).value,
+
+            paragraph1:
+                document.getElementById(
+                    "aboutParagraph1"
+                ).value,
+
+            paragraph2:
+                document.getElementById(
+                    "aboutParagraph2"
+                ).value
+
+        },
+
+
+        academics: {
+
+            heading:
+                document.getElementById(
+                    "academicHeading"
+                ).value,
+
+            description:
+                document.getElementById(
+                    "academicDescription"
+                ).value
+
+        },
+
+
+        classes: {
+
+            P1:
+                document.getElementById(
+                    "p1Description"
+                ).value,
+
+            P2:
+                document.getElementById(
+                    "p2Description"
+                ).value,
+
+            P3:
+                document.getElementById(
+                    "p3Description"
+                ).value,
+
+            P4:
+                document.getElementById(
+                    "p4Description"
+                ).value,
+
+            P5:
+                document.getElementById(
+                    "p5Description"
+                ).value,
+
+            P6:
+                document.getElementById(
+                    "p6Description"
+                ).value,
+
+            P7:
+                document.getElementById(
+                    "p7Description"
+                ).value
+
+        },
+
+
+        news: {
+
+            title:
+                document.getElementById(
+                    "newsTitle"
+                ).value,
+
+            description:
+                document.getElementById(
+                    "newsDescription"
+                ).value
+
+        },
+
+
+        contact: {
+
+            phone:
+                document.getElementById(
+                    "contactPhone"
+                ).value,
+
+            email:
+                document.getElementById(
+                    "contactEmail"
+                ).value,
+
+            address:
+                document.getElementById(
+                    "contactAddress"
+                ).value,
+
+            whatsapp:
+                document.getElementById(
+                    "contactWhatsapp"
+                ).value
 
         }
 
+    };
 
-        /* ==========================
-           OPEN EDITOR SECTION
-           ========================== */
+}
 
-        function openSection(sectionId) {
 
-            const sections =
-                document.querySelectorAll(".edit-section");
 
-            sections.forEach(function(section) {
+/* =====================================================
+   PREPARE SECTION
+   ===================================================== */
 
-                section.classList.remove("active");
+function prepareSection(sectionName) {
+
+    pendingWebsiteData =
+        collectWebsiteData();
+
+
+    pendingWebsiteData.editedSection =
+        sectionName;
+
+
+    pendingWebsiteData.editor =
+        editorName;
+
+
+    showStatus(
+        sectionName.toUpperCase() +
+        " changes prepared successfully. Open Publish Changes when ready."
+    );
+
+}
+
+
+
+/* =====================================================
+   PHOTO PREVIEW
+   ===================================================== */
+
+const photoInput =
+    document.getElementById(
+        "photoInput"
+    );
+
+
+photoInput.addEventListener(
+    "change",
+    function(event) {
+
+        const preview =
+            document.getElementById(
+                "photoPreview"
+            );
+
+
+        preview.innerHTML = "";
+
+
+        selectedGalleryFiles =
+            Array.from(event.target.files);
+
+
+        selectedGalleryFiles.forEach(
+            function(file, index) {
+
+                if (
+                    !file.type.startsWith("image/")
+                ) {
+
+                    return;
+
+                }
+
+
+                const reader =
+                    new FileReader();
+
+
+                reader.onload =
+                    function(e) {
+
+                        const item =
+                            document.createElement(
+                                "div"
+                            );
+
+
+                        item.className =
+                            "preview-item";
+
+
+                        item.innerHTML = `
+
+                            <img
+                                src="${e.target.result}"
+                                alt="Selected school photo"
+                            >
+
+                            <button
+                                type="button"
+                                onclick="removeGalleryPhoto(${index})">
+
+                                ×
+
+                            </button>
+
+                        `;
+
+
+                        preview.appendChild(item);
+
+                    };
+
+
+                reader.readAsDataURL(file);
 
             });
 
+    }
+);
 
-            const selected =
-                document.getElementById(sectionId);
 
-            if (selected) {
 
-                selected.classList.add("active");
+/* =====================================================
+   REMOVE GALLERY PHOTO
+   ===================================================== */
 
-                selected.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start"
-                });
+function removeGalleryPhoto(index) {
 
-            }
+    selectedGalleryFiles.splice(
+        index,
+        1
+    );
 
-        }
 
+    renderGalleryPreview();
 
-        /* ==========================
-           SAVE WEBSITE CHANGES
-           ========================== */
+}
 
-        function saveChanges() {
 
-            const currentData =
-                JSON.parse(
-                    localStorage.getItem("schoolData")
-                ) || {};
 
+/* =====================================================
+   RENDER GALLERY PREVIEW
+   ===================================================== */
 
-            /* HOMEPAGE */
+function renderGalleryPreview() {
 
-            const homepageSection =
-                document.getElementById("homepage");
+    const preview =
+        document.getElementById(
+            "photoPreview"
+        );
 
-            if (
-                homepageSection.classList.contains("active")
-            ) {
 
-                const inputs =
-                    homepageSection.querySelectorAll(
-                        "input, textarea"
-                    );
+    preview.innerHTML = "";
 
-                currentData.heroWelcome =
-                    inputs[0].value;
 
-                currentData.heroHeading =
-                    inputs[1].value;
-
-                currentData.heroDescription =
-                    inputs[2].value;
-
-            }
-
-
-            /* TICKER */
-
-            const tickerSection =
-                document.getElementById("ticker");
-
-            if (
-                tickerSection.classList.contains("active")
-            ) {
-
-                const inputs =
-                    tickerSection.querySelectorAll("input");
-
-                currentData.ticker1 =
-                    inputs[0].value;
-
-                currentData.ticker2 =
-                    inputs[1].value;
-
-                currentData.ticker3 =
-                    inputs[2].value;
-
-                currentData.ticker4 =
-                    inputs[3].value;
-
-            }
-
-
-            /* ABOUT */
-
-            const aboutSection =
-                document.getElementById("about");
-
-            if (
-                aboutSection.classList.contains("active")
-            ) {
-
-                const inputs =
-                    aboutSection.querySelectorAll(
-                        "input, textarea"
-                    );
-
-                currentData.aboutHeading =
-                    inputs[0].value;
-
-                currentData.aboutParagraph1 =
-                    inputs[1].value;
-
-                currentData.aboutParagraph2 =
-                    inputs[2].value;
-
-            }
-
-
-            /* CONTACT */
-
-            const contactSection =
-                document.getElementById("contact");
-
-            if (
-                contactSection.classList.contains("active")
-            ) {
-
-                const inputs =
-                    contactSection.querySelectorAll(
-                        "input, textarea"
-                    );
-
-                currentData.phone =
-                    inputs[0].value;
-
-                currentData.email =
-                    inputs[1].value;
-
-                currentData.address =
-                    inputs[2].value;
-
-                currentData.whatsapp =
-                    inputs[3].value.replace(/\D/g, "");
-
-            }
-
-
-            /* SAVE */
-
-            localStorage.setItem(
-                "schoolData",
-                JSON.stringify(currentData)
-            );
-
-
-            alert(
-                "✅ Changes saved successfully!"
-            );
-
-        }
-
-
-        /* ==========================
-           PHOTO PREVIEW
-           ========================== */
-
-        const photoInput =
-            document.getElementById("photoInput");
-
-
-        if (photoInput) {
-
-            photoInput.addEventListener(
-                "change",
-                function(event) {
-
-                    const preview =
-                        document.getElementById(
-                            "photoPreview"
-                        );
-
-                    preview.innerHTML = "";
-
-                    const files =
-                        event.target.files;
-
-
-                    Array.from(files).forEach(
-                        function(file) {
-
-                            if (
-                                !file.type.startsWith(
-                                    "image/"
-                                )
-                            ) {
-
-                                return;
-
-                            }
-
-
-                            const reader =
-                                new FileReader();
-
-
-                            reader.onload =
-                                function(e) {
-
-                                    const item =
-                                        document.createElement(
-                                            "div"
-                                        );
-
-                                    item.className =
-                                        "preview-item";
-
-
-                                    item.innerHTML = `
-                                        <img
-                                            src="${e.target.result}"
-                                            alt="Selected school photo"
-                                        >
-
-                                        <button
-                                            type="button"
-                                            onclick="this.parentElement.remove()"
-                                        >
-                                            ×
-                                        </button>
-                                    `;
-
-
-                                    preview.appendChild(
-                                        item
-                                    );
-
-                                };
-
-
-                            reader.readAsDataURL(file);
-
-                        }
-                    );
-
-                }
-            );
-
-        }
-
-
-        /* ==========================
-           LOGO PREVIEW
-           ========================== */
-
-        const logoInput =
-            document.getElementById("logoInput");
-
-
-        if (logoInput) {
-
-            logoInput.addEventListener(
-                "change",
-                function(event) {
-
-                    const file =
-                        event.target.files[0];
-
-
-                    if (!file) {
-
-                        return;
-
-                    }
-
-
-                    if (
-                        !file.type.startsWith(
-                            "image/"
-                        )
-                    ) {
-
-                        alert(
-                            "Please select an image."
-                        );
-
-                        return;
-
-                    }
-
-
-                    const reader =
-                        new FileReader();
-
-
-                    reader.onload =
-                        function(e) {
-
-                            document.getElementById(
-                                "logoPreview"
-                            ).innerHTML = `
-
-                                <p style="
-                                    margin-bottom:10px;
-                                    color:#777;
-                                ">
-                                    New Logo Preview
-                                </p>
-
-                                <img
-                                    src="${e.target.result}"
-                                    alt="New Logo Preview"
-                                >
-
-                            `;
-
-                        };
-
-
-                    reader.readAsDataURL(file);
-
-                }
-            );
-
-        }
-
-
-        /* ==========================
-           SAVE LOGO
-           ========================== */
-
-        function saveLogo() {
-
-            const file =
-                document.getElementById(
-                    "logoInput"
-                ).files[0];
-
-
-            if (!file) {
-
-                alert(
-                    "Please choose a logo first."
-                );
-
-                return;
-
-            }
-
-
-            if (
-                !file.type.startsWith("image/")
-            ) {
-
-                alert(
-                    "Please select an image file."
-                );
-
-                return;
-
-            }
-
+    selectedGalleryFiles.forEach(
+        function(file, index) {
 
             const reader =
                 new FileReader();
@@ -1398,20 +2235,35 @@
             reader.onload =
                 function(e) {
 
-                    localStorage.setItem(
-                        "schoolLogo",
-                        e.target.result
-                    );
+                    const item =
+                        document.createElement(
+                            "div"
+                        );
 
 
-                    document.getElementById(
-                        "currentLogoPreview"
-                    ).src = e.target.result;
+                    item.className =
+                        "preview-item";
 
 
-                    alert(
-                        "✅ School logo saved successfully!"
-                    );
+                    item.innerHTML = `
+
+                        <img
+                            src="${e.target.result}"
+                            alt="School photo"
+                        >
+
+                        <button
+                            type="button"
+                            onclick="removeGalleryPhoto(${index})">
+
+                            ×
+
+                        </button>
+
+                    `;
+
+
+                    preview.appendChild(item);
 
                 };
 
@@ -1419,24 +2271,317 @@
             reader.readAsDataURL(file);
 
         }
+    );
+
+}
 
 
-        /* ==========================
-           LOGOUT
-           ========================== */
 
-        function logout() {
+/* =====================================================
+   PREPARE GALLERY
+   ===================================================== */
 
-            sessionStorage.removeItem(
-                "editorLoggedIn"
-            );
+function prepareGallery() {
 
-            window.location.href =
-                "editor-login.html";
+    if (
+        selectedGalleryFiles.length === 0
+    ) {
+
+        showStatus(
+            "Please select at least one photo.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    pendingWebsiteData.gallery = {
+        photoCount:
+            selectedGalleryFiles.length
+    };
+
+
+    pendingWebsiteData.editedSection =
+        "gallery";
+
+
+    pendingWebsiteData.editor =
+        editorName;
+
+
+    showStatus(
+        selectedGalleryFiles.length +
+        " photo(s) prepared for publishing."
+    );
+
+}
+
+
+
+/* =====================================================
+   LOGO PREVIEW
+   ===================================================== */
+
+const logoInput =
+    document.getElementById(
+        "logoInput"
+    );
+
+
+logoInput.addEventListener(
+    "change",
+    function(event) {
+
+        const file =
+            event.target.files[0];
+
+
+        if (!file) {
+
+            return;
 
         }
 
-    </script>
+
+        if (
+            !file.type.startsWith("image/")
+        ) {
+
+            showStatus(
+                "Please select an image file.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        selectedLogoFile =
+            file;
+
+
+        const reader =
+            new FileReader();
+
+
+        reader.onload =
+            function(e) {
+
+                document.getElementById(
+                    "logoPreview"
+                ).innerHTML = `
+
+                    <p
+                        style="
+                            margin-bottom:10px;
+                            color:#777;
+                        ">
+
+                        New Logo Preview
+
+                    </p>
+
+                    <img
+                        src="${e.target.result}"
+                        alt="New Logo Preview">
+
+                `;
+
+            };
+
+
+        reader.readAsDataURL(file);
+
+    }
+);
+
+
+
+/* =====================================================
+   PREPARE LOGO
+   ===================================================== */
+
+function prepareLogo() {
+
+    if (!selectedLogoFile) {
+
+        showStatus(
+            "Please choose a logo first.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    pendingWebsiteData.logo = {
+        fileName:
+            selectedLogoFile.name,
+        type:
+            selectedLogoFile.type
+    };
+
+
+    pendingWebsiteData.editedSection =
+        "logo";
+
+
+    pendingWebsiteData.editor =
+        editorName;
+
+
+    showStatus(
+        "New logo prepared for publishing."
+    );
+
+}
+
+
+
+/* =====================================================
+   PUBLISH WEBSITE
+   ===================================================== */
+
+async function publishWebsite() {
+
+    if (
+        Object.keys(pendingWebsiteData).length === 0
+    ) {
+
+        showStatus(
+            "Please make and save a change first.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    /*
+        IMPORTANT:
+
+        DO NOT put a GitHub token here.
+
+        This will later be replaced with the
+        address of our secure publishing service.
+    */
+
+    const PUBLISH_API =
+        "YOUR_SECURE_PUBLISHING_API";
+
+
+    if (
+        PUBLISH_API ===
+        "YOUR_SECURE_PUBLISHING_API"
+    ) {
+
+        alert(
+
+            "The dashboard is ready.\n\n" +
+
+            "The secure GitHub publishing connection " +
+            "has not been installed yet.\n\n" +
+
+            "Next we will connect this button to the " +
+            "secure publishing system."
+
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                PUBLISH_API,
+                {
+
+                    method: "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body:
+                        JSON.stringify(
+                            pendingWebsiteData
+                        )
+
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                result.message ||
+                "Publishing failed."
+            );
+
+        }
+
+
+        showStatus(
+            "✅ Website published successfully!"
+        );
+
+
+        pendingWebsiteData = {};
+
+
+    } catch (error) {
+
+        console.error(error);
+
+
+        showStatus(
+            "❌ Publishing failed. Please try again.",
+            "error"
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   LOGOUT
+   ===================================================== */
+
+function logout() {
+
+    sessionStorage.removeItem(
+        "editorLoggedIn"
+    );
+
+
+    sessionStorage.removeItem(
+        "editorName"
+    );
+
+
+    window.location.href =
+        "editor-login.html";
+
+}
+
+</script>
 
 </body>
 </html>
