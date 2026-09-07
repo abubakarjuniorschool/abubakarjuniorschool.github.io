@@ -2,349 +2,221 @@
 <html lang="en">
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Editor Login | Abubakar Junior School</title>
 
-    <title>Editor Login | Abubakar Junior School</title>
+<style>
 
-    <style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f4f6f9;
+        color: #222;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
 
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #0756a8, #043b73);
-            padding: 20px;
-        }
+    .login-card {
+        background: white;
+        width: min(400px, 100%);
+        padding: 35px 30px;
+        border-radius: 14px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        text-align: center;
+    }
 
-        .login-container {
-            width: 100%;
-            max-width: 420px;
-        }
+    .badge {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: #0756a8;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        margin: 0 auto 15px;
+        font-size: 15px;
+    }
 
-        .login-card {
-            background: white;
-            border-radius: 18px;
-            padding: 35px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-        }
+    .login-card h1 {
+        font-size: 19px;
+        color: #0756a8;
+        margin-bottom: 6px;
+    }
 
-        .logo {
-            text-align: center;
-            margin-bottom: 25px;
-        }
+    .login-card h2 {
+        font-size: 14px;
+        color: #777;
+        font-weight: normal;
+        margin-bottom: 25px;
+    }
 
-        .logo-icon {
-            width: 75px;
-            height: 75px;
-            margin: 0 auto 15px;
+    .field {
+        text-align: left;
+        margin-bottom: 16px;
+    }
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+    .field label {
+        display: block;
+        font-weight: bold;
+        font-size: 13px;
+        margin-bottom: 6px;
+        color: #333;
+    }
 
-            background: #0756a8;
-            color: white;
+    .field input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 15px;
+        font-family: inherit;
+    }
 
-            border-radius: 50%;
+    .field input:focus {
+        outline: none;
+        border-color: #0756a8;
+        box-shadow: 0 0 0 2px rgba(7,86,168,0.08);
+    }
 
-            font-size: 22px;
-            font-weight: bold;
-        }
+    .login-btn {
+        width: 100%;
+        background: #0756a8;
+        color: white;
+        border: none;
+        padding: 13px;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 15px;
+        margin-top: 6px;
+    }
 
-        .logo h1 {
-            color: #0756a8;
-            font-size: 24px;
-            margin-bottom: 6px;
-        }
+    .login-btn:hover {
+        background: #06437f;
+    }
 
-        .logo p {
-            color: #777;
-            font-size: 14px;
-        }
+    .login-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
 
-        .field {
-            margin-bottom: 18px;
-        }
+    #loginError {
+        display: none;
+        background: #fdecec;
+        color: #a51c30;
+        border: 1px solid #f2c0c7;
+        padding: 10px 12px;
+        border-radius: 8px;
+        font-size: 13px;
+        margin-bottom: 16px;
+    }
 
-        .field label {
-            display: block;
-            margin-bottom: 7px;
-            font-weight: bold;
-            color: #333;
-        }
+    .back-link {
+        display: inline-block;
+        margin-top: 20px;
+        font-size: 13px;
+        color: #0756a8;
+        text-decoration: none;
+    }
 
-        .field input {
-            width: 100%;
-            padding: 13px 14px;
-            border: 1px solid #d8d8d8;
-            border-radius: 9px;
-            font-size: 15px;
-            font-family: inherit;
-        }
+    .back-link:hover {
+        text-decoration: underline;
+    }
 
-        .field input:focus {
-            outline: none;
-            border-color: #0756a8;
-            box-shadow: 0 0 0 3px rgba(7,86,168,0.1);
-        }
+    .note {
+        margin-top: 18px;
+        font-size: 12px;
+        color: #999;
+    }
 
-        .login-btn {
-            width: 100%;
-            border: none;
-            background: #0756a8;
-            color: white;
-            padding: 13px;
-            border-radius: 9px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 5px;
-        }
-
-        .login-btn:hover {
-            background: #06437f;
-        }
-
-        .error-message {
-            display: none;
-            background: #ffe6ea;
-            color: #b00320;
-            padding: 11px;
-            border-radius: 8px;
-            margin-bottom: 16px;
-            font-size: 14px;
-            text-align: center;
-        }
-
-        .back-link {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            color: #0756a8;
-            text-decoration: none;
-            font-size: 14px;
-        }
-
-        .back-link:hover {
-            text-decoration: underline;
-        }
-
-        .security-note {
-            margin-top: 18px;
-            text-align: center;
-            color: #888;
-            font-size: 12px;
-            line-height: 1.5;
-        }
-
-        @media (max-width: 500px) {
-
-            .login-card {
-                padding: 25px 20px;
-            }
-
-        }
-
-    </style>
+</style>
 
 </head>
-
 <body>
 
-<div class="login-container">
+<div class="login-card">
 
-    <div class="login-card">
+    <div class="badge">AJS</div>
 
-        <div class="logo">
+    <h1>Abubakar Junior School</h1>
+    <h2>Editor Login</h2>
 
-            <div class="logo-icon">
-                AJS
-            </div>
+    <div id="loginError">❌ Incorrect editor email or password.</div>
 
-            <h1>
-                Abubakar Junior School
-            </h1>
+    <form id="loginForm">
 
-            <p>
-                Editor Login
-            </p>
-
+        <div class="field">
+            <label for="editorEmail">Editor Email</label>
+            <input type="email" id="editorEmail" required autocomplete="username">
         </div>
 
-
-        <div
-            class="error-message"
-            id="errorMessage">
-
-            ❌ Incorrect editor name or password.
-
+        <div class="field">
+            <label for="editorPassword">Password</label>
+            <input type="password" id="editorPassword" required autocomplete="current-password">
         </div>
 
+        <button class="login-btn" type="submit" id="loginBtn">LOGIN TO EDITOR</button>
 
-        <form onsubmit="loginEditor(event)">
+    </form>
 
-            <div class="field">
+    <a class="back-link" href="index.html">← Back to School Website</a>
 
-                <label for="editorName">
-                    Editor Name
-                </label>
-
-                <input
-                    type="text"
-                    id="editorName"
-                    placeholder="Enter editor name"
-                    autocomplete="username"
-                    required>
-
-            </div>
-
-
-            <div class="field">
-
-                <label for="editorPassword">
-                    Password
-                </label>
-
-                <input
-                    type="password"
-                    id="editorPassword"
-                    placeholder="Enter password"
-                    autocomplete="current-password"
-                    required>
-
-            </div>
-
-
-            <button
-                type="submit"
-                class="login-btn">
-
-                LOGIN TO EDITOR
-
-            </button>
-
-        </form>
-
-
-        <a href="index.html" class="back-link">← Back to School Website</a>
-
-
-        <div class="security-note">
-
-            Authorized school editors only.
-
-        </div>
-
-    </div>
+    <p class="note">Authorized school editors only.</p>
 
 </div>
 
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 
-function loginEditor(event) {
+const SUPABASE_URL = "https://ggthkvlynzgslzdqnymo.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_G_h5jXptFUfDRwAf2XIA8w_Vf97C82l";
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    event.preventDefault();
+// If already logged in, skip straight to the dashboard
+(async function redirectIfLoggedIn() {
+    const { data: { session } } = await sb.auth.getSession();
+    if (session) {
+        window.location.href = "editor-dashboard.html";
+    }
+})();
 
+document.getElementById("loginForm").addEventListener("submit", async function (e) {
 
-    const name =
-        document
-            .getElementById("editorName")
-            .value
-            .trim()
-            .toUpperCase();
+    e.preventDefault();
 
+    const email = document.getElementById("editorEmail").value.trim();
+    const password = document.getElementById("editorPassword").value;
+    const errorBox = document.getElementById("loginError");
+    const btn = document.getElementById("loginBtn");
 
-    const password =
-        document
-            .getElementById("editorPassword")
-            .value;
+    errorBox.style.display = "none";
+    btn.disabled = true;
+    btn.textContent = "Logging in...";
 
+    const { error } = await sb.auth.signInWithPassword({ email, password });
 
-    const errorMessage =
-        document.getElementById(
-            "errorMessage"
-        );
+    btn.disabled = false;
+    btn.textContent = "LOGIN TO EDITOR";
 
-
-    /*
-     * CURRENT EDITOR ACCOUNT
-     */
-
-    const correctName =
-        "ABUBAKAR";
-
-
-    const correctPassword =
-        "AJS123456";
-
-
-    /*
-     * CHECK LOGIN
-     */
-
-    if (
-        name === correctName &&
-        password === correctPassword
-    ) {
-
-        sessionStorage.setItem(
-            "editorLoggedIn",
-            "true"
-        );
-
-
-        sessionStorage.setItem(
-            "editorName",
-            "ABUBAKAR"
-        );
-
-
-        /*
-         * IMPORTANT:
-         *
-         * The actual dashboard file must be
-         * saved as exactly:
-         *
-         * editor-dashboard.html
-         */
-
-        window.location.href =
-            "editor-dashboard.html";
-
+    if (error) {
+        errorBox.style.display = "block";
+        return;
     }
 
-    else {
+    window.location.href = "editor-dashboard.html";
 
-        errorMessage.style.display =
-            "block";
-
-
-        document
-            .getElementById(
-                "editorPassword"
-            )
-            .value = "";
-
-
-        document
-            .getElementById(
-                "editorPassword"
-            )
-            .focus();
-
-    }
-
-}
+});
 
 </script>
 
