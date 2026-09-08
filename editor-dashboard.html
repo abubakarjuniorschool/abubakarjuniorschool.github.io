@@ -1257,9 +1257,10 @@ async function saveClasses(event) {
                     firstPhotoUrl = pub.publicUrl;
                 }
 
-                await sb.from("gallery").insert({
+                                await sb.from("gallery").insert({
                     image_url: pub.publicUrl,
-                    caption: id + " class photo"
+                    caption: id + " class photo",
+                    class_id: lower
                 });
 
             }
