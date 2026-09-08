@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -223,8 +223,8 @@
 
             <div class="hero-buttons">
 
-                <a
-                    href="index.html#classes"
+                
+                <a    href="index.html#classes"
                     class="btn secondary"
                 >
                     Back to Classes
@@ -679,97 +679,108 @@
 </footer>
 
 
-<!-- P3 PHOTO JAVASCRIPT -->
+<!-- P3 PHOTO — LOADED FROM SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
-    function loadP3Photos() {
-
-        for (let i = 1; i <= 5; i++) {
-
-            const photo =
-                localStorage.getItem("p3Photo" + i);
-
-            const image =
-                document.getElementById("p3-photo-" + i);
-
-            const placeholder =
-                document.getElementById("p3-placeholder-" + i);
-
-            const download =
-                document.getElementById("p3-download-" + i);
+const SUPABASE_URL = "https://ggthkvlynzgslzdqnymo.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_G_h5jXptFUfDRwAf2XIA8w_Vf97C82l";
+const sbClassPage = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 
-            if (photo) {
+async function loadP3Photos() {
 
-                image.src = photo;
+    const { data, error } = await sbClassPage
+        .from("gallery")
+        .select("image_url")
+        .eq("class_id", "p3")
+        .order("created_at", { ascending: true })
+        .limit(5);
 
-                image.style.display = "block";
+    if (error) {
+        console.error("Failed to load Primary Three photos:", error);
+    }
 
-                placeholder.style.display = "none";
+    const photos = (data || []).map(function (row) {
+        return row.image_url;
+    });
 
-                download.href = photo;
+    for (let i = 1; i <= 5; i++) {
 
-                download.style.display = "inline-block";
+        const url = photos[i - 1];
 
-            } else {
+        const image = document.getElementById("p3-photo-" + i);
+        const placeholder = document.getElementById("p3-placeholder-" + i);
+        const download = document.getElementById("p3-download-" + i);
 
-                image.style.display = "none";
+        if (url) {
 
-                placeholder.style.display = "flex";
+            image.src = url;
+            image.style.display = "block";
 
-                download.style.display = "none";
+            placeholder.style.display = "none";
 
-            }
+            download.href = url;
+            download.style.display = "inline-block";
+
+        } else {
+
+            image.style.display = "none";
+            placeholder.style.display = "flex";
+            download.style.display = "none";
 
         }
 
     }
 
+}
 
-    function openClassPhoto(src) {
 
-        if (!src) {
-            return;
-        }
+function openClassPhoto(src) {
 
-        document.getElementById(
-            "classLightboxImage"
-        ).src = src;
-
-        document.getElementById(
-            "classPhotoLightbox"
-        ).classList.add("active");
-
+    if (!src) {
+        return;
     }
 
+    document.getElementById(
+        "classLightboxImage"
+    ).src = src;
 
-    function closeClassPhoto() {
+    document.getElementById(
+        "classPhotoLightbox"
+    ).classList.add("active");
 
-        document.getElementById(
-            "classPhotoLightbox"
-        ).classList.remove("active");
+}
 
-        document.getElementById(
-            "classLightboxImage"
-        ).src = "";
+
+function closeClassPhoto() {
+
+    document.getElementById(
+        "classPhotoLightbox"
+    ).classList.remove("active");
+
+    document.getElementById(
+        "classLightboxImage"
+    ).src = "";
+
+}
+
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (event.key === "Escape") {
+            closeClassPhoto();
+        }
 
     }
+);
 
 
-    document.addEventListener(
-        "keydown",
-        function(event) {
-
-            if (event.key === "Escape") {
-                closeClassPhoto();
-            }
-
-        }
-    );
-
-
-    loadP3Photos();
+loadP3Photos();
 
 </script>
 
