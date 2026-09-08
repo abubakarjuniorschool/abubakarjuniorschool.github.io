@@ -32,7 +32,7 @@ async function loadLiveContent() {
             sbLive.from("classes").select("*"),
             sbLive.from("announcements").select("*").eq("is_published", true).order("created_at"),
             sbLive.from("news").select("*").eq("is_published", true).order("created_at", { ascending: false }).limit(6),
-            sbLive.from("gallery").select("*").order("created_at", { ascending: false }).limit(12),
+            sbLive.from("gallery").select("*").is("class_id", null).order("created_at", { ascending: false }).limit(12),
             sbLive.from("site_settings").select("*").eq("id", "settings").maybeSingle()
         ]);
 
