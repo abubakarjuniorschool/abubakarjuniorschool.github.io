@@ -248,8 +248,8 @@
 
             <div class="hero-buttons">
 
-                <a
-                    href="index.html#classes"
+                
+                  <a  href="index.html#classes"
                     class="btn secondary"
                 >
                     Back to Classes
@@ -512,7 +512,7 @@
                     </span>
                 </div>
 
-                <a
+                
                     id="p4-download-2"
                     class="photo-download"
                     href="#"
@@ -731,39 +731,58 @@
 
 
 <!-- ==========================
-     P4 PHOTO JAVASCRIPT
+     P4 PHOTO — LOADED FROM SUPABASE
      ========================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
-function loadP4Photos() {
+const SUPABASE_URL = "https://ggthkvlynzgslzdqnymo.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_G_h5jXptFUfDRwAf2XIA8w_Vf97C82l";
+const sbClassPage = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+
+async function loadP4Photos() {
+
+    const { data, error } = await sbClassPage
+        .from("gallery")
+        .select("image_url")
+        .eq("class_id", "p4")
+        .order("created_at", { ascending: true })
+        .limit(5);
+
+    if (error) {
+        console.error("Failed to load Primary Four photos:", error);
+    }
+
+    const photos = (data || []).map(function (row) {
+        return row.image_url;
+    });
 
     for (let i = 1; i <= 5; i++) {
 
-        const photo =
-            localStorage.getItem("p4Photo" + i);
+        const url = photos[i - 1];
 
-        const image =
-            document.getElementById("p4-photo-" + i);
+        const image = document.getElementById("p4-photo-" + i);
+        const placeholder = document.getElementById("p4-placeholder-" + i);
+        const download = document.getElementById("p4-download-" + i);
 
-        const placeholder =
-            document.getElementById("p4-placeholder-" + i);
+        if (url) {
 
-        const download =
-            document.getElementById("p4-download-" + i);
-
-
-        if (photo) {
-
-            image.src = photo;
-
+            image.src = url;
             image.style.display = "block";
 
             placeholder.style.display = "none";
 
-            download.href = photo;
-
+            download.href = url;
             download.style.display = "inline-block";
+
+        } else {
+
+            image.style.display = "none";
+            placeholder.style.display = "flex";
+            download.style.display = "none";
 
         }
 
@@ -819,4 +838,4 @@ loadP4Photos();
 </script>
 
 </body>
-</html>
+</html>f
