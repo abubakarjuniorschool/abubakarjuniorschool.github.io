@@ -226,7 +226,7 @@
 
             <div class="hero-buttons">
 
-                <a
+                
                     href="index.html#classes"
                     class="btn secondary"
                 >
@@ -454,7 +454,7 @@
                     </span>
                 </div>
 
-                <a
+                
                     id="p6-download-1"
                     class="photo-download"
                     href="#"
@@ -489,7 +489,7 @@
                     </span>
                 </div>
 
-                <a
+                
                     id="p6-download-2"
                     class="photo-download"
                     href="#"
@@ -524,7 +524,7 @@
                     </span>
                 </div>
 
-                <a
+                
                     id="p6-download-3"
                     class="photo-download"
                     href="#"
@@ -559,7 +559,7 @@
                     </span>
                 </div>
 
-                <a
+                
                     id="p6-download-4"
                     class="photo-download"
                     href="#"
@@ -594,7 +594,7 @@
                     </span>
                 </div>
 
-                <a
+                
                     id="p6-download-5"
                     class="photo-download"
                     href="#"
@@ -708,46 +708,57 @@
 
 
 <!-- ==========================
-     P6 PHOTO JAVASCRIPT
+     P6 PHOTO — LOADED FROM SUPABASE
      ========================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
-function loadP6Photos() {
+const SUPABASE_URL = "https://ggthkvlynzgslzdqnymo.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_G_h5jXptFUfDRwAf2XIA8w_Vf97C82l";
+const sbClassPage = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+
+async function loadP6Photos() {
+
+    const { data, error } = await sbClassPage
+        .from("gallery")
+        .select("image_url")
+        .eq("class_id", "p6")
+        .order("created_at", { ascending: true })
+        .limit(5);
+
+    if (error) {
+        console.error("Failed to load Primary Six photos:", error);
+    }
+
+    const photos = (data || []).map(function (row) {
+        return row.image_url;
+    });
 
     for (let i = 1; i <= 5; i++) {
 
-        const photo =
-            localStorage.getItem("p6Photo" + i);
+        const url = photos[i - 1];
 
-        const image =
-            document.getElementById("p6-photo-" + i);
+        const image = document.getElementById("p6-photo-" + i);
+        const placeholder = document.getElementById("p6-placeholder-" + i);
+        const download = document.getElementById("p6-download-" + i);
 
-        const placeholder =
-            document.getElementById("p6-placeholder-" + i);
+        if (url) {
 
-        const download =
-            document.getElementById("p6-download-" + i);
-
-
-        if (photo) {
-
-            image.src = photo;
-
+            image.src = url;
             image.style.display = "block";
 
             placeholder.style.display = "none";
 
-            download.href = photo;
-
+            download.href = url;
             download.style.display = "inline-block";
 
         } else {
 
             image.style.display = "none";
-
             placeholder.style.display = "flex";
-
             download.style.display = "none";
 
         }
